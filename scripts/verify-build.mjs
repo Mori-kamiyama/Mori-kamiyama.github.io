@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 const root = path.resolve('dist');
+// Separately deployed GitHub Pages app, verified in the browser; not part of this build.
+const separatePagesApps = new Set(['https://mori-kamiyama.github.io/right-turn-only-gmap/']);
 const files = fs.readdirSync(root,{recursive:true}).filter(f=>f.endsWith('.html'));
 let checked = 0;
 for (const file of files) {
@@ -9,6 +11,7 @@ for (const file of files) {
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const url = new URL(match[1],base);
     if (url.origin !== base.origin) continue;
+    if (separatePagesApps.has(url.href)) continue;
     let target=path.join(root,decodeURIComponent(url.pathname));
     if (url.pathname.endsWith('/')) target=path.join(target,'index.html');
     if (!fs.existsSync(target)) throw new Error(`Broken local URL: ${file} → ${match[1]}`);

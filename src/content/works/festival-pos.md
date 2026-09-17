@@ -2,7 +2,7 @@
 title: "まるごと祭レジシステム"
 description: "神山まるごと高専の高専祭で使うPOSシステムを制作。初めてのWebアプリ開発に取り組みました。"
 year: 2024
-order: 12
+order: 17
 categories: ["Program"]
 cover: "../../assets/studio-pos.webp"
 coverAlt: "まるごと祭レジシステムの画面"

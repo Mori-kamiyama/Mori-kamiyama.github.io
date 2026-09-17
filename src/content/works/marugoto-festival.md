@@ -2,7 +2,7 @@
 title: "まるごと祭テクノロジーリーダー"
 description: "「つくることはいきること」をテーマにした企画展示。テクノロジーリーダーとして全体をサポートしました。"
 year: 2025
-order: 3
+order: 8
 categories: ["Management"]
 cover: "../../assets/studio-marugoto.webp"
 coverAlt: "まるごと祭のカラフルなビジュアル"

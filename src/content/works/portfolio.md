@@ -2,7 +2,7 @@
 title: "My Portfolio"
 description: "自分の技術力・デザイン力・マネジメント力をありのままに伝えるポートフォリオ。白黒と作品グリッドを軸に設計しました。"
 year: 2026
-order: 1
+order: 6
 categories: ["Program","Design"]
 cover: "../../assets/portrait.jpeg"
 coverAlt: "森川結太のポートレート"

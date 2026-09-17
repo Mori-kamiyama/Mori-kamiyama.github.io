@@ -2,7 +2,7 @@
 title: "タスク処理支援LINE Bot"
 description: "Cohere APIでタスクを細かく分割し、空き時間に取り組めるミニタスクをおすすめするLINE Botです。"
 year: 2025
-order: 8
+order: 13
 categories: ["Program"]
 cover: "../../assets/studio-line-bot.webp"
 coverAlt: "LINE Botのビジュアル"

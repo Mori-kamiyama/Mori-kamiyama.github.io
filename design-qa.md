@@ -4,6 +4,10 @@ final result: passed
 
 ## Current scope and comparison
 
+Latest update: duplicate Home CTAs removed (Works/Blog each retain one arrow link); the visible motion control becomes keyboard-only, with tap-to-toggle on the marquee. Five verified recent works added, for 21 total. Current evidence folder: `/Users/yuta/.codex/visualizations/2026/09/17/portfolio-expansion/`. `home-blog-before.png` captures the original two Works CTAs above Blog; the mistakenly positioned `works-before.png` was rejected. `works-after.png` shows the new original project assets and 21-item count. Local check/build passes; 29 HTML files and 966 local URLs verified. Source/asset references are documented in `docs/recent-work-sources.md`.
+
+`comparison.png` compares the current-run published Home Blog capture (`blog-source.png`, left) and the local implementation (`home-blog-after.png`, right) at the same normal viewport, normalized to 544 × 683. Fonts, gutter, colors, source article copy and three-line fade match; the duplicate continuation CTA is removed as requested. DOM confirms Works/Blog each have one arrow CTA, Works has no extra button, Home Blog has no separate continuation CTA. In-app tapping the real Skills row toggles persistent pause `true` then `false`; the visible stop button is absent in normal pointer use. Keyboard-only control and reduced-motion behavior are covered in the updated CI regression. No actionable P0/P1/P2 issue found in this scope.
+
 The existing visual target is retained. The owner greeting now precedes the About policy; the actual portfolio production record replaces the general AI essay as the recommendation; Home can expand all 16 existing works.
 
 Current-run evidence: `/Users/yuta/.codex/visualizations/2026/09/17/portfolio-refinement/`.

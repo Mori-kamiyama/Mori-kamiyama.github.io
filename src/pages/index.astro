@@ -30,42 +30,37 @@ const works = (await getCollection('works')).sort((a, b) => a.data.order - b.dat
     <ArrowLink href="/profile/" label="私について" />
   </div></section>
   <section class="section skills-section" aria-labelledby="skills-title"><div class="container">
-    <div class="section-heading"><h2 class="section-title" id="skills-title">Skills</h2><button class="motion-toggle" type="button" aria-pressed="false">スライドを停止</button></div>
+    <div class="section-heading"><h2 class="section-title" id="skills-title">Skills</h2><button class="motion-toggle sr-only" type="button" aria-pressed="false">スライドを停止</button></div>
     <div class="skills-motion"><Skills marquee /><Skills design marquee reverse /></div>
     <ArrowLink href="/profile/#skills" label="スキルと価値観を見る" />
   </div></section>
   <section class="section works-section" aria-labelledby="works-title"><div class="container">
     <div class="section-heading"><h2 class="section-title" id="works-title">Works</h2><p>つくったもの、取り組んだこと。<br /><span class="works-count">{works.length} projects</span></p></div>
     <div class="works-preview" id="home-works"><div class="works-grid">{works.map(work => <WorkCard work={work} monochrome />)}</div></div>
-    <button class="text-link works-expand" type="button" aria-expanded="false" aria-controls="home-works">このページで全{works.length}件を見る</button>
     <ArrowLink href="/works/" label="すべての作品を見る" />
   </div></section>
   <section class="section blog-section" aria-labelledby="blog-title"><div class="container">
     <h2 class="section-title" id="blog-title">Blog</h2>
-    <BlogSuggestions heading="h3" />
+    <BlogSuggestions heading="h3" continuation={false} />
     <ArrowLink href="/blog/" label="記事を読む" />
   </div></section>
   <Contact />
 </Base>
 <script>
   document.querySelectorAll<HTMLElement>('.works-preview').forEach(preview => {
-    const button = document.querySelector<HTMLButtonElement>(`.works-expand[aria-controls="${preview.id}"]`);
-    const expand = () => {
-      preview.classList.add('is-expanded');
-      if (button) { button.setAttribute('aria-expanded', 'true'); button.hidden = true; }
-    };
-    button?.addEventListener('click', expand);
     preview.addEventListener('focusin', () => {
-      if (document.activeElement?.matches('a:focus-visible')) expand();
+      if (document.activeElement?.matches('a:focus-visible')) preview.classList.add('is-expanded');
     });
   });
   document.querySelectorAll<HTMLButtonElement>('.motion-toggle').forEach(button => {
-    button.addEventListener('click', () => {
+    const toggle = () => {
       const section = button.closest<HTMLElement>('.skills-section');
       const paused = button.getAttribute('aria-pressed') !== 'true';
       button.setAttribute('aria-pressed', String(paused));
       button.textContent = paused ? 'スライドを再開' : 'スライドを停止';
       if (section) section.dataset.motionPaused = String(paused);
-    });
+    };
+    button.addEventListener('click', toggle);
+    button.closest('.skills-section')?.querySelector('.skills-motion')?.addEventListener('click', toggle);
   });
 </script>

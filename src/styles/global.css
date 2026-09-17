@@ -81,12 +81,11 @@ main:focus { outline: none; }
 @media (hover:hover) { .skills-motion:hover .marquee-track { animation-play-state: paused; } }
 .motion-toggle { border: 1px solid var(--soft-rule); background: var(--paper); border-radius: 30px; font-size: 12px; padding: 8px 16px; margin-bottom: 36px; white-space: nowrap; }
 .motion-toggle:hover { border-color: var(--ink); }
+.motion-toggle:focus-visible { position: static; width: auto; height: auto; margin: 0 0 36px; padding: 8px 16px; overflow: visible; clip-path: none; border: 1px solid var(--ink); }
 @keyframes skills-drift { to { transform: translateX(-50%); } }
 .works-preview { max-height: 820px; overflow: hidden; padding: 10px; margin: -10px; mask-image: linear-gradient(to bottom, #000 0%, #000 calc(100% - 180px), transparent 100%); }
 .works-preview.is-expanded,.works-preview:has(a:focus-visible) { max-height: none; mask-image: none; }
 .works-count { font-family: var(--english); color: var(--muted); font-size: 14px; }
-.works-expand { margin-top: 30px; min-height: 44px; border: 0; border-bottom: 1px solid var(--ink); background: transparent; cursor: pointer; }
-.works-expand[hidden] { display: none; }
 .section-heading { display: flex; align-items: baseline; gap: 24px; justify-content: space-between; }
 .section-heading > p { font-size: 14px; color: var(--muted); }
 .works-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: clamp(24px,3.64vw,55px); align-items: stretch; }

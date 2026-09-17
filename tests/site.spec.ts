@@ -12,9 +12,12 @@ test('skills motion can stop and resume, and reduced motion stays readable', asy
   expect(await tracks.nth(0).evaluate(el => getComputedStyle(el).animationDirection)).toBe('normal');
   expect(await tracks.nth(1).evaluate(el => getComputedStyle(el).animationDirection)).toBe('reverse');
   await expect(page.locator('.marquee-group[aria-hidden="true"]')).toHaveCount(2);
-  await page.getByRole('button', { name: 'スライドを停止', exact: true }).click();
+  const motionToggle = page.getByRole('button', { name: 'スライドを停止', exact: true });
+  expect(await motionToggle.evaluate(el => getComputedStyle(el).clipPath)).toBe('inset(50%)');
+  await motionToggle.focus();
+  await motionToggle.press('Enter');
   for (const track of await tracks.all()) expect(await track.evaluate(el => getComputedStyle(el).animationPlayState)).toBe('paused');
-  await page.getByRole('button', { name: 'スライドを再開', exact: true }).click();
+  await page.getByRole('button', { name: 'スライドを再開', exact: true }).press('Enter');
   for (const track of await tracks.all()) expect(await track.evaluate(el => getComputedStyle(el).animationPlayState)).toBe('running');
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(page.locator('.motion-toggle')).toBeHidden();
@@ -27,11 +30,11 @@ test('faded previews keep a visible route to complete content', async ({ page })
   await page.goto('/');
   const preview = page.locator('.works-preview');
   expect(await preview.evaluate(el => el.scrollHeight > el.clientHeight)).toBe(true);
-  await expect(preview.getByRole('link')).toHaveCount(16);
-  await page.getByRole('button', { name: 'このページで全16件を見る' }).click();
-  await expect(preview).toHaveCSS('max-height', 'none');
-  await expect(page.getByRole('button', { name: 'このページで全16件を見る' })).toBeHidden();
-  await page.reload();
+  await expect(preview.getByRole('link')).toHaveCount(workRoutes.length);
+  await expect(page.locator('.works-section button')).toHaveCount(0);
+  await expect(page.locator('.works-section .arrow-link')).toHaveCount(1);
+  await expect(page.locator('.blog-section .text-link')).toHaveCount(0);
+  await expect(page.locator('.blog-section .arrow-link')).toHaveCount(1);
   await page.keyboard.press('Tab');
   await preview.getByRole('link').first().focus();
   await expect(preview).toHaveCSS('max-height', 'none');
@@ -40,7 +43,7 @@ test('faded previews keep a visible route to complete content', async ({ page })
   await expect(preview.getByRole('link', { name: 'タスク処理支援LINE Botの詳細を見る' })).toBeInViewport();
   await page.getByRole('link', { name: 'すべての作品を見る', exact: true }).click();
   await expect(page).toHaveURL(/\/works\/$/);
-  await expect(page.locator('.work-card:visible')).toHaveCount(16);
+  await expect(page.locator('.work-card:visible')).toHaveCount(workRoutes.length);
   await page.goto('/blog/');
   const excerpt = page.locator('.blog-excerpt');
   expect(await excerpt.evaluate(el => el.scrollHeight > el.clientHeight)).toBe(true);
@@ -65,7 +68,8 @@ test('all pages render, local assets load, and metadata is complete', async ({ p
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`overflow on ${route}`).toBe(true);
     // Stop moving images for inspection, then expand Home to load images below the fade.
     if (route === '/') {
-      await page.getByRole('button', { name: 'スライドを停止', exact: true }).click();
+      await page.getByRole('button', { name: 'スライドを停止', exact: true }).focus();
+      await page.getByRole('button', { name: 'スライドを停止', exact: true }).press('Enter');
       await page.keyboard.press('Tab');
       await page.locator('.works-preview a').first().focus();
       await expect(page.locator('.works-preview')).toHaveCSS('max-height', 'none');
@@ -80,7 +84,7 @@ test('all pages render, local assets load, and metadata is complete', async ({ p
 
 test('category filters show matching works and can reset', async ({ page }) => {
   await page.goto('/works/');
-  await expect(page.locator('.work-card:visible')).toHaveCount(16);
+  await expect(page.locator('.work-card:visible')).toHaveCount(workRoutes.length);
   for (const category of ['Program','Design','Management']) {
     await page.getByRole('button',{name:category,exact:true}).click();
     await expect(page.getByRole('button',{name:category,exact:true})).toHaveAttribute('aria-pressed','true');
@@ -90,7 +94,7 @@ test('category filters show matching works and can reset', async ({ page }) => {
     await expect(page.getByRole('status')).toContainText(category);
   }
   await page.getByRole('button',{name:'All',exact:true}).click();
-  await expect(page.locator('.work-card:visible')).toHaveCount(16);
+  await expect(page.locator('.work-card:visible')).toHaveCount(workRoutes.length);
 });
 
 test('navigation works with keyboard and the mobile menu closes', async ({ page, isMobile }) => {

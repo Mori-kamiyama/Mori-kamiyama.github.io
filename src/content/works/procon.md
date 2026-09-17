@@ -2,7 +2,7 @@
 title: "高専プログラミングコンテスト出場"
 description: "高専プロコン競技部門で探索プログラムを担当。初戦敗退からも、計算量の改善など多くの経験を得ました。"
 year: 2025
-order: 4
+order: 9
 categories: ["Program"]
 cover: "../../assets/studio-procon.webp"
 coverAlt: "高専プログラミングコンテストのチーム集合写真"

@@ -2,7 +2,7 @@
 title: "Toromino"
 description: "セルオートマトンなどの人工生命をつくる学生団体を立ち上げました。簡単なコードから生まれる創発を探究しています。"
 year: 2024
-order: 16
+order: 21
 categories: ["Program","Management"]
 cover: "../../assets/studio-toromino.webp"
 coverAlt: "セルオートマトンによる人工生命のパターン"
