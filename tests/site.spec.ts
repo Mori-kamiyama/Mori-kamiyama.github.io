@@ -5,6 +5,43 @@ const workRoutes = readdirSync('src/content/works').filter(f=>f.endsWith('.md'))
 const blogRoutes = readdirSync('src/content/blog').filter(f=>f.endsWith('.md')).map(f=>`/blog/${f.slice(0,-3)}/`);
 const routes = ['/', '/profile/', '/works/', '/blog/', ...workRoutes, ...blogRoutes];
 
+test('skills motion can stop and resume, and reduced motion stays readable', async ({ page }) => {
+  await page.goto('/');
+  const tracks = page.locator('.marquee-track');
+  await expect(tracks).toHaveCount(2);
+  expect(await tracks.nth(0).evaluate(el => getComputedStyle(el).animationDirection)).toBe('normal');
+  expect(await tracks.nth(1).evaluate(el => getComputedStyle(el).animationDirection)).toBe('reverse');
+  await expect(page.locator('.marquee-group[aria-hidden="true"]')).toHaveCount(2);
+  await page.getByRole('button', { name: 'スライドを停止', exact: true }).click();
+  for (const track of await tracks.all()) expect(await track.evaluate(el => getComputedStyle(el).animationPlayState)).toBe('paused');
+  await page.getByRole('button', { name: 'スライドを再開', exact: true }).click();
+  for (const track of await tracks.all()) expect(await track.evaluate(el => getComputedStyle(el).animationPlayState)).toBe('running');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(page.locator('.motion-toggle')).toBeHidden();
+  for (const track of await tracks.all()) expect(await track.evaluate(el => getComputedStyle(el).animationName)).toBe('none');
+  for (const group of await page.locator('.marquee-group[aria-hidden="true"]').all()) await expect(group).toBeHidden();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('faded previews keep a visible route to complete content', async ({ page }) => {
+  await page.goto('/');
+  const preview = page.locator('.works-preview');
+  expect(await preview.evaluate(el => el.scrollHeight > el.clientHeight)).toBe(true);
+  await page.keyboard.press('Tab');
+  await preview.getByRole('link', { name: 'タスク処理支援LINE Botの詳細を見る' }).focus();
+  expect(await preview.evaluate(el => getComputedStyle(el).maxHeight)).toBe('none');
+  await expect(preview.getByRole('link', { name: 'タスク処理支援LINE Botの詳細を見る' })).toBeInViewport();
+  await page.getByRole('link', { name: 'すべての作品を見る', exact: true }).click();
+  await expect(page.locator('.work-card:visible')).toHaveCount(16);
+  await page.goto('/blog/');
+  const excerpt = page.locator('.blog-excerpt');
+  expect(await excerpt.evaluate(el => el.scrollHeight > el.clientHeight)).toBe(true);
+  expect(await excerpt.evaluate(el => Math.abs(el.clientHeight / parseFloat(getComputedStyle(el).lineHeight) - 3))).toBeLessThan(0.05);
+  await page.getByRole('link', { name: /続きを読む/ }).click();
+  await expect(page).toHaveURL(/\/blog\/programming-with-ai\/$/);
+  await expect(page.getByRole('heading', { name: '言語の壁が溶けるとき' })).toBeVisible();
+});
+
 test('all pages render, local assets load, and metadata is complete', async ({ page }) => {
   test.setTimeout(120_000);
   const errors: string[] = [];

@@ -6,6 +6,7 @@ import WorkCard from '../components/WorkCard.astro';
 import Skills from '../components/Skills.astro';
 import ArrowLink from '../components/ArrowLink.astro';
 import Contact from '../components/Contact.astro';
+import BlogSuggestions from '../components/BlogSuggestions.astro';
 import portrait from '../assets/portrait.jpeg';
 import illustration from '../assets/about-illustration.png';
 const works = (await getCollection('works')).sort((a, b) => a.data.order - b.data.order).slice(0, 8);
@@ -14,7 +15,7 @@ const posts = (await getCollection('blog')).filter(p => p.data.date).sort((a,b) 
 <Base>
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-inner">
-      <Image class="hero-portrait" src={portrait} alt="神山の景色を背景にした森川結太" widths={[600, 1120, 1680]} sizes="(max-width: 760px) 100vw, 74vw" width={1120} height={495} fit="cover" position="center" loading="eager" fetchpriority="high" format="webp" />
+      <Image class="hero-portrait" src={portrait} alt="神山の景色を背景にした森川結太" widths={[600, 1120, 1680]} sizes="(max-width: 760px) 226vw, 74vw" width={1120} height={495} fit="cover" position="center" loading="eager" fetchpriority="high" format="webp" />
       <div class="hero-name"><h1 id="hero-title">森川結太</h1><p>Morikawa Yuta</p></div>
       <p class="hero-tags"># 静岡県育ち <span># 神山まるごと高専生</span> <span># プログラミング</span></p>
     </div>
@@ -29,17 +30,31 @@ const posts = (await getCollection('blog')).filter(p => p.data.date).sort((a,b) 
     <ArrowLink href="/profile/" label="私について" />
   </div></section>
   <section class="section skills-section" aria-labelledby="skills-title"><div class="container">
-    <h2 class="section-title" id="skills-title">Skills</h2><Skills /><ArrowLink href="/profile/#skills" label="スキルと価値観を見る" />
+    <div class="section-heading"><h2 class="section-title" id="skills-title">Skills</h2><button class="motion-toggle" type="button" aria-pressed="false">スライドを停止</button></div>
+    <div class="skills-motion"><Skills marquee /><Skills design marquee reverse /></div>
+    <ArrowLink href="/profile/#skills" label="スキルと価値観を見る" />
   </div></section>
   <section class="section works-section" aria-labelledby="works-title"><div class="container">
     <div class="section-heading"><h2 class="section-title" id="works-title">Works</h2><p>つくったもの、取り組んだこと。</p></div>
-    <div class="works-grid">{works.map(work => <WorkCard work={work} monochrome />)}</div>
+    <div class="works-preview"><div class="works-grid">{works.map(work => <WorkCard work={work} monochrome />)}</div></div>
     <ArrowLink href="/works/" label="すべての作品を見る" />
   </div></section>
   <section class="section blog-section" aria-labelledby="blog-title"><div class="container">
     <h2 class="section-title" id="blog-title">Blog</h2>
     <ul class="post-list">{posts.map(post => <li><a href={`/blog/${post.id}/`}><time datetime={post.data.date!.toISOString()}>{post.data.date!.toLocaleDateString('ja-JP',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'})}</time><span>{post.data.title}</span><span aria-hidden="true">↗</span></a></li>)}</ul>
+    <BlogSuggestions heading="h3" />
     <ArrowLink href="/blog/" label="記事を読む" />
   </div></section>
   <Contact />
 </Base>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.motion-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+      const section = button.closest<HTMLElement>('.skills-section');
+      const paused = button.getAttribute('aria-pressed') !== 'true';
+      button.setAttribute('aria-pressed', String(paused));
+      button.textContent = paused ? 'スライドを再開' : 'スライドを停止';
+      if (section) section.dataset.motionPaused = String(paused);
+    });
+  });
+</script>

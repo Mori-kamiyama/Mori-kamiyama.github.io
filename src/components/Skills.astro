@@ -14,12 +14,18 @@ import illustrator from '../assets/profile-imgImage24.png';
 import figma from '../assets/profile-imgImage23.png';
 import studio from '../assets/profile-imgImage26.png';
 import { Image } from 'astro:assets';
-interface Props { design?: boolean; labels?: boolean; }
-const { design = false, labels = false } = Astro.props;
+interface Props { design?: boolean; labels?: boolean; marquee?: boolean; reverse?: boolean; }
+const { design = false, labels = false, marquee = false, reverse = false } = Astro.props;
 const skills = design
   ? [{ name: 'Photoshop', image: photoshop }, { name: 'Illustrator', image: illustrator }, { name: 'Figma', image: figma }, { name: 'Studio', image: studio }]
   : [{ name: 'Python', image: python }, { name: 'TypeScript', image: typescript }, { name: 'React', image: react }, { name: 'Next.js', image: next }, { name: 'Rust', image: rust }, { name: 'Swift', image: swift }, { name: 'C++', image: cpp }, { name: 'HTML', image: html }, { name: 'GitHub', image: github }, { name: 'Docker', image: docker }];
 ---
-<ul class:list={['skills-list', { 'with-labels': labels, 'design-skills': design }]} aria-label={design ? 'デザインツール' : 'プログラミング・開発ツール'}>
+{marquee ? <div class:list={['skills-marquee', { reverse }]}>
+  <div class="marquee-track">
+    {[0, 1].map(copy => <ul class:list={['marquee-group', { 'design-skills': design }]} aria-label={copy === 0 ? (design ? 'デザインツール' : 'プログラミング・開発ツール') : undefined} aria-hidden={copy === 1 ? 'true' : undefined}>
+      {skills.map(skill => <li><Image src={skill.image} alt={copy === 0 ? skill.name : ''} width={design && skill.name === 'Studio' ? 130 : 60} height={60} loading="eager" /></li>)}
+    </ul>)}
+  </div>
+</div> : <ul class:list={['skills-list', { 'with-labels': labels, 'design-skills': design }]} aria-label={design ? 'デザインツール' : 'プログラミング・開発ツール'}>
   {skills.map(skill => <li><Image src={skill.image} alt={labels ? '' : skill.name} width={design && skill.name === 'Studio' ? 130 : 60} height={60} loading="lazy" />{labels && <span>{skill.name}</span>}</li>)}
-</ul>
+</ul>}

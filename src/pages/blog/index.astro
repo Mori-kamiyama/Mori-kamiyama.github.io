@@ -1,12 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import BlogSuggestions from '../../components/BlogSuggestions.astro';
 const posts = await getCollection('blog');
 const news = posts.filter(p=>p.data.date).sort((a,b)=>b.data.date!.getTime()-a.data.date!.getTime());
-const featured = posts.filter(p=>p.data.featured);
 ---
 <Base title="Blog"><div class="container page-content blog-index">
   <h1 class="page-title"># Blog</h1><ul class="post-list">{news.map(post=><li><a href={`/blog/${post.id}/`}><time datetime={post.data.date!.toISOString()}>{post.data.date!.toLocaleDateString('ja-JP',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'})}</time><span>{post.data.title}</span><span aria-hidden="true">↗</span></a></li>)}</ul>
-  <section class="recommended"><h2># Recommend</h2>{featured.map(post=><article><h3><a href={`/blog/${post.id}/`}>{post.data.title}</a></h3><p>{post.data.description}</p><a class="text-link" href={`/blog/${post.id}/`}>続きを読む</a></article>)}</section>
+  <BlogSuggestions />
   <a class="external-reading" href="https://zenn.dev/mori_mino" target="_blank" rel="noopener noreferrer"><span>技術の記事はZennでも書いています。</span><span>Zenn ↗</span><span class="sr-only">（新しいタブで開きます）</span></a>
 </div></Base>

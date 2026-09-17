@@ -15,7 +15,7 @@ const values = [
 <Base title="Profile">
   <div class="container page-content">
     <h1 class="page-title"># Profile</h1>
-    <div class="profile-intro"><div><Image class="profile-portrait" src={portrait} widths={[600, 1000, 1600]} sizes="(max-width: 760px) 90vw, 60vw" width={1000} height={443} fit="cover" loading="eager" fetchpriority="high" alt="森川結太のプロフィール写真" format="webp" /><div class="hero-name"><h2>森川結太</h2><p>Morikawa Yuta</p></div></div>
+    <div class="profile-intro"><div><Image class="profile-portrait" src={portrait} widths={[600, 1000, 1600]} sizes="(max-width: 760px) 157vw, 60vw" width={1000} height={443} fit="cover" loading="eager" fetchpriority="high" alt="森川結太のプロフィール写真" format="webp" /><div class="hero-name"><h2>森川結太</h2><p>Morikawa Yuta</p></div></div>
       <aside class="profile-history" aria-label="出身と経歴"><div><h3>出身</h3><p>静岡県三島市</p></div><div><h3>経歴</h3><dl>{history.map(([year,event])=><div><dt>{year}</dt><dd>{event}</dd></div>)}</dl></div></aside>
     </div>
     <p class="profile-greeting">はじめまして、神山まるごと高専の森川結太です。<br />エンジニアリング・デザイン・アントレプレナーシップを学びながら、<br class="desktop-only" />日々、面白いものをつくっています。</p>

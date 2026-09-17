@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+interface Props { heading?: 'h2' | 'h3'; }
+const { heading = 'h2' } = Astro.props;
+const Heading = heading;
+const ArticleHeading = heading === 'h2' ? 'h3' : 'h4';
+const featured = (await getCollection('blog')).filter(post => post.data.featured);
+const excerpt = (body: string) => body.split(/\n\s*\n/).filter(part => !part.trim().startsWith('#')).slice(0, 5).join(' ').trim();
+---
+<section class="recommended" aria-label="おすすめの記事">
+  <Heading># Recommend</Heading>
+  {featured.map(post => <article>
+    <ArticleHeading><a href={`/blog/${post.id}/`}>{post.data.title}</a></ArticleHeading>
+    <p class="blog-excerpt">{excerpt(post.body ?? '')}</p>
+    <a class="text-link" href={`/blog/${post.id}/`}>続きを読む<span class="sr-only">：{post.data.title}</span></a>
+  </article>)}
+</section>
