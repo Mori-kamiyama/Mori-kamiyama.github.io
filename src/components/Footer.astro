@@ -1,0 +1,8 @@
+---
+import { navigation } from '../data/site';
+---
+<footer class="site-footer container">
+  <a class="wordmark" href="/">&lt;Portfolio/&gt;</a>
+  <nav aria-label="フッターナビゲーション">{navigation.map(item => <a href={item.href}>{item.label}</a>)}</nav>
+  <div class="footer-note"><span>© {new Date().getFullYear()} Morikawa Yuta</span><a href="#main">ページの先頭へ ↑</a></div>
+</footer>

@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import Skills from '../components/Skills.astro';
+import Contact from '../components/Contact.astro';
+import { Image } from 'astro:assets';
+import portrait from '../assets/portrait.jpeg';
+const history = [ ['2018', 'WRO タイ国際大会出場'], ['2019', '山崎賞受賞'], ['2020', '山崎賞受賞'], ['2022', 'Startup Weekend 三島 優勝'], ['2023', '神山まるごと高専入学'] ];
+const values = [
+  {title:'経営者目線を忘れない', text:'技術は手段であり、目的ではありません。コードの先には必ずユーザーがいて、その先にビジネスの成果がつながります。エンジニアとして手を動かしながらも、「なぜ作るのか」「誰のためにつくるのか」を問い続け、コストやUXを広い視点で考えていきます。'},
+  {title:'AIといっしょに、責任は自分が', text:'AIは強力なツールです。しかし、責任までは負ってくれません。設計の妥当性・セキュリティと制作スピードをうまく折り合わせ、自分が責任を負える使い方を考えます。責任を果たすための勉強も継続しています。'},
+  {title:'Fast Try, Then Perfect', text:'完璧を待つより、まず動くものをつくる。小さく試して素早くフィードバックを得ることで、リスクを最小化しながら学習速度を最大化します。早期の失敗から学ぶことで、より良いプロダクトへの最短経路を見つけていきます。'},
+  {title:'最後までこだわり尽くす', text:'作り始めは速くても、成果物は完璧にします。フォントや色など、こだわれる部分はこだわり尽くして、自分が誇れるプロダクトをつくります。'},
+];
+---
+<Base title="Profile">
+  <div class="container page-content">
+    <h1 class="page-title"># Profile</h1>
+    <div class="profile-intro"><div><Image class="profile-portrait" src={portrait} widths={[600, 1000, 1600]} sizes="(max-width: 760px) 90vw, 60vw" width={1000} height={443} fit="cover" loading="eager" fetchpriority="high" alt="森川結太のプロフィール写真" format="webp" /><div class="hero-name"><h2>森川結太</h2><p>Morikawa Yuta</p></div></div>
+      <aside class="profile-history" aria-label="出身と経歴"><div><h3>出身</h3><p>静岡県三島市</p></div><div><h3>経歴</h3><dl>{history.map(([year,event])=><div><dt>{year}</dt><dd>{event}</dd></div>)}</dl></div></aside>
+    </div>
+    <p class="profile-greeting">はじめまして、神山まるごと高専の森川結太です。<br />エンジニアリング・デザイン・アントレプレナーシップを学びながら、<br class="desktop-only" />日々、面白いものをつくっています。</p>
+    <section class="profile-section" id="skills"><h2># Skills</h2><p>2024年からプログラミング・デザインを始めました。<br />高専プログラミングコンテストや校内でのプロジェクトを通して、<br class="desktop-only" />iOSアプリからWebアプリ、サーバー周りまで学んできました。</p><Skills labels /><p>デザインでは、FigmaやIllustratorなどのデザインツールからStudioといったノーコードまで。<br class="desktop-only" />ケースに応じた制作を学んできました。</p><Skills design labels /></section>
+    <section class="profile-section"><h2># 価値観</h2><div class="values-list">{values.map(value=><div><h3>{value.title}</h3><p>{value.text}</p></div>)}</div></section>
+  </div><Contact />
+</Base>

@@ -1,0 +1,52 @@
+---
+import { navigation } from '../data/site';
+const path = Astro.url.pathname;
+---
+<a class="skip-link" href="#main">本文へ移動</a>
+<div class="masthead" aria-hidden="true"><span>&lt;Portfolio/&gt;</span></div>
+<header class="site-header" id="site-header">
+  <nav class="desktop-nav" aria-label="メインナビゲーション">
+    {navigation.slice(0, 2).map(item => <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>)}
+    <a class="wordmark" href="/" aria-label="森川結太のポートフォリオ Home">&lt;Portfolio/&gt;</a>
+    {navigation.slice(2).map(item => <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>)}
+  </nav>
+  <div class="mobile-bar">
+    <a class="wordmark" href="/" aria-label="森川結太のポートフォリオ Home">&lt;Portfolio/&gt;</a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="モバイルナビゲーション" hidden>
+    {navigation.map(item => <a href={item.href} aria-current={path === item.href || (item.href !== '/' && path.startsWith(item.href)) ? 'page' : undefined}>{item.label}</a>)}
+    <a href="/#contact">Contact</a>
+  </nav>
+</header>
+<script>
+  const header = document.querySelector<HTMLElement>('#site-header');
+  const masthead = document.querySelector<HTMLElement>('.masthead');
+  if (header && masthead) {
+    const observer = new IntersectionObserver(([entry]) => header.classList.toggle('is-scrolled', !entry.isIntersecting));
+    observer.observe(masthead);
+  }
+  const button = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const menu = document.querySelector<HTMLElement>('#mobile-menu');
+  const closeMenu = () => {
+    if (!button || !menu) return;
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-label', 'メニューを開く');
+    menu.hidden = true;
+  };
+  button?.addEventListener('click', () => {
+    if (!menu) return;
+    const opening = button.getAttribute('aria-expanded') !== 'true';
+    button.setAttribute('aria-expanded', String(opening));
+    button.setAttribute('aria-label', opening ? 'メニューを閉じる' : 'メニューを開く');
+    menu.hidden = !opening;
+  });
+  menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && button?.getAttribute('aria-expanded') === 'true') { closeMenu(); button.focus(); }
+  });
+  document.addEventListener('click', event => {
+    if (event.target instanceof Node && header && !header.contains(event.target)) closeMenu();
+  });
+  matchMedia('(min-width: 761px)').addEventListener('change', closeMenu);
+</script>

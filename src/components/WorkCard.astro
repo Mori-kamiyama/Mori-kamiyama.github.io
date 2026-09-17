@@ -1,0 +1,16 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+interface Props { work: CollectionEntry<'works'>; monochrome?: boolean; }
+const { work, monochrome = false } = Astro.props;
+const { title, year, order, description, cover, coverAlt, categories, imageFit } = work.data;
+---
+<article class:list={['work-card', { monochrome }]} data-categories={categories.join(' ')}>
+  <a href={`/works/${work.id}/`} aria-label={`${title}の詳細を見る`}>
+    <div class="card-meta"><span>No.{order}</span><span>{year}</span></div>
+    <h3>{title}</h3>
+    <div class:list={['card-image', { contain: imageFit === 'contain' }]}><Image src={cover} alt={coverAlt} widths={[300, 600]} sizes="(max-width: 540px) 88vw, (max-width: 1000px) 42vw, 22vw" width={600} loading="lazy" format="webp" /></div>
+    <p>{description}</p>
+    <div class="card-bottom"><span>{categories.join(' / ')}</span><span aria-hidden="true">↗</span></div>
+  </a>
+</article>

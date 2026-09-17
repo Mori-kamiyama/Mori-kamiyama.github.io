@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import { getCollection } from 'astro:content';
+const works = (await getCollection('works')).sort((a,b)=>a.data.order-b.data.order);
+---
+<Base title="Works" description="プログラミング・デザイン・マネジメント。森川結太がつくったものと取り組んだプロジェクトをご紹介します。">
+  <div class="container page-content">
+    <div class="works-heading"><h1 class="page-title"># Works</h1><div class="filter-list" aria-label="作品のカテゴリー"><button type="button" data-filter="All" aria-pressed="true">All</button>{['Program','Design','Management'].map(category=><button type="button" data-filter={category} aria-pressed="false">{category}</button>)}</div></div>
+    <p class="works-introduction">つくったもの、取り組んだこと。<span id="work-count" role="status" aria-live="polite">全{works.length}件</span></p>
+    <div class="works-grid" id="work-grid">{works.map(work=><WorkCard work={work} />)}</div>
+  </div>
+</Base>
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('#work-grid .work-card');
+  const count = document.querySelector('#work-count');
+  buttons.forEach(button => button.addEventListener('click', () => {
+    const category = button.dataset.filter!;
+    buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+    let visible=0;
+    cards.forEach(card=>{card.hidden=category!=='All' && !card.dataset.categories?.split(' ').includes(category);if(!card.hidden)visible++;});
+    if(count) count.textContent = category==='All'?`全${visible}件`:`${category}：${visible}件`;
+  }));
+</script>

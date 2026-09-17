@@ -1,0 +1,35 @@
+---
+import '@fontsource-variable/figtree';
+import '@fontsource/noto-sans-jp/400.css';
+import '@fontsource/noto-sans-jp/500.css';
+import '@fontsource/noto-sans-jp/700.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+interface Props { title?: string; description?: string; article?: boolean; }
+const { title, description = site.description, article = false } = Astro.props;
+const pageTitle = title ? `${title} | ${site.title}` : site.title;
+const isNotFound = Astro.url.pathname === '/404/' || Astro.url.pathname === '/404.html';
+const canonical = new URL(isNotFound ? '/404.html' : Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og.png', Astro.site);
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Person', name: site.name, alternateName: site.englishName, url: Astro.site?.toString(), sameAs: ['https://github.com/Mori-kamiyama', 'https://x.com/mori_kamiyama', 'https://zenn.dev/mori_mino'] };
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title><meta name="description" content={description} />
+    {isNotFound && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} /><link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="alternate" type="application/rss+xml" title="森川結太のBlog" href="/rss.xml" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:type" content={article ? 'article' : 'website'} /><meta property="og:locale" content="ja_JP" />
+    <meta property="og:title" content={pageTitle} /><meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} /><meta property="og:site_name" content={site.title} />
+    <meta property="og:image" content={ogImage} /><meta property="og:image:alt" content="森川結太のポートフォリオ" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body><Header /><main id="main" tabindex="-1"><slot /></main><Footer /></body>
+</html>

@@ -1,0 +1,25 @@
+---
+import python from '../assets/profile-imgImage22.png';
+import typescript from '../assets/profile-imgGroup9.svg';
+import react from '../assets/profile-imgGroup.svg';
+import next from '../assets/profile-imgNextJs3.svg';
+import rust from '../assets/profile-imgRust.svg';
+import swift from '../assets/profile-imgSwift153.svg';
+import cpp from '../assets/profile-imgC13.svg';
+import html from '../assets/profile-imgHtml1.svg';
+import github from '../assets/profile-imgGithubIcon23.svg';
+import docker from '../assets/profile-imgGroup1.svg';
+import photoshop from '../assets/profile-imgImage25.png';
+import illustrator from '../assets/profile-imgImage24.png';
+import figma from '../assets/profile-imgImage23.png';
+import studio from '../assets/profile-imgImage26.png';
+import { Image } from 'astro:assets';
+interface Props { design?: boolean; labels?: boolean; }
+const { design = false, labels = false } = Astro.props;
+const skills = design
+  ? [{ name: 'Photoshop', image: photoshop }, { name: 'Illustrator', image: illustrator }, { name: 'Figma', image: figma }, { name: 'Studio', image: studio }]
+  : [{ name: 'Python', image: python }, { name: 'TypeScript', image: typescript }, { name: 'React', image: react }, { name: 'Next.js', image: next }, { name: 'Rust', image: rust }, { name: 'Swift', image: swift }, { name: 'C++', image: cpp }, { name: 'HTML', image: html }, { name: 'GitHub', image: github }, { name: 'Docker', image: docker }];
+---
+<ul class:list={['skills-list', { 'with-labels': labels, 'design-skills': design }]} aria-label={design ? 'デザインツール' : 'プログラミング・開発ツール'}>
+  {skills.map(skill => <li><Image src={skill.image} alt={labels ? '' : skill.name} width={design && skill.name === 'Studio' ? 130 : 60} height={60} loading="lazy" />{labels && <span>{skill.name}</span>}</li>)}
+</ul>

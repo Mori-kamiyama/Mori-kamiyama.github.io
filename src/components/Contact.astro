@@ -1,0 +1,11 @@
+---
+import { socials } from '../data/site';
+---
+<section class="section contact-section" id="contact" aria-labelledby="contact-title">
+  <div class="container">
+    <h2 class="section-title" id="contact-title">Contact</h2>
+    <div class="contact-content"><div><h3>つくることから、<br />いっしょに。</h3><p>取り組みについてのお話やご相談は、<br class="desktop-only" />Xのプロフィールからご連絡ください。</p></div>
+      <ul class="social-links">{socials.map(social => <li><a href={social.href} target="_blank" rel="noopener noreferrer"><span><strong>{social.label}</strong><small>{social.note}</small></span><span aria-hidden="true">↗</span><span class="sr-only">（新しいタブで開きます）</span></a></li>)}</ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,29 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import WorkCard from '../../components/WorkCard.astro';
+export async function getStaticPaths() {
+  return (await getCollection('works')).map(work=>({params:{id:work.id},props:{work}}));
+}
+interface Props { work: CollectionEntry<'works'>; }
+const { work } = Astro.props;
+const { Content } = await render(work);
+const others = (await getCollection('works')).filter(w=>w.id!==work.id).sort((a,b)=>b.data.categories.filter(c=>work.data.categories.includes(c)).length-a.data.categories.filter(c=>work.data.categories.includes(c)).length || a.data.order-b.data.order).slice(0,3);
+---
+<Base title={work.data.title} description={work.data.description} article>
+  <div class="container detail-page">
+    <nav class="breadcrumb" aria-label="パンくず"><a href="/works/">Works</a><span aria-hidden="true">&gt;</span><span aria-current="page">{work.data.title}</span></nav>
+    <article class="work-detail">
+      <Image class:list={['detail-cover', { contain: work.data.imageFit === 'contain' }]} src={work.data.cover} widths={[600,1000,1400]} sizes="(max-width: 760px) 90vw, 800px" width={1000} alt={work.data.coverAlt} loading="eager" fetchpriority="high" format="webp" />
+      <div class="detail-meta"><span>{work.data.year}</span><span>{work.data.categories.join(' / ')}</span></div>
+      <h1># {work.data.title}</h1><p class="detail-description">{work.data.description}</p>
+      {work.data.technologies.length>0&&<ul class="technology-list" aria-label="使用技術">{work.data.technologies.map(t=><li>{t}</li>)}</ul>}
+      <div class="prose"><Content /></div>
+      {work.data.gallery.length>0&&<section class="gallery"><h2>## Gallery</h2><div>{work.data.gallery.map(item=><figure><a href={item.image.src} target="_blank" rel="noopener noreferrer" aria-label={`${item.alt}を拡大（新しいタブ）`}><Image src={item.image} width={800} alt={item.alt} loading="lazy" format="webp" /></a><figcaption>{item.caption}</figcaption></figure>)}</div></section>}
+      {work.data.links.length>0&&<ul class="detail-links">{work.data.links.map(link=><li><a href={link.url} target="_blank" rel="noopener noreferrer">{link.label} ↗<span class="sr-only">（新しいタブで開きます）</span></a></li>)}</ul>}
+    </article>
+    <section class="related-works"><h2>ほかの取り組み</h2><div class="works-grid related-grid">{others.map(w=><WorkCard work={w} />)}</div><a class="text-link" href="/works/">作品一覧に戻る</a></section>
+  </div>
+</Base>
