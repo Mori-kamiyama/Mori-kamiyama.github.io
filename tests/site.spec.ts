@@ -28,6 +28,8 @@ test('faded previews keep a visible route to complete content', async ({ page })
   const preview = page.locator('.works-preview');
   expect(await preview.evaluate(el => el.scrollHeight > el.clientHeight)).toBe(true);
   await page.keyboard.press('Tab');
+  await preview.getByRole('link').first().focus();
+  await expect(preview).toHaveCSS('max-height', 'none');
   await preview.getByRole('link', { name: 'タスク処理支援LINE Botの詳細を見る' }).focus();
   expect(await preview.evaluate(el => getComputedStyle(el).maxHeight)).toBe('none');
   await expect(preview.getByRole('link', { name: 'タスク処理支援LINE Botの詳細を見る' })).toBeInViewport();
