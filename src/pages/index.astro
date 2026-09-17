@@ -8,7 +8,7 @@ import ArrowLink from '../components/ArrowLink.astro';
 import Contact from '../components/Contact.astro';
 import BlogSuggestions from '../components/BlogSuggestions.astro';
 import portrait from '../assets/portrait.jpeg';
-import illustration from '../assets/about-illustration.png';
+import illustration from '../assets/about-illustration.svg';
 const works = (await getCollection('works')).sort((a, b) => a.data.order - b.data.order);
 ---
 <Base>
@@ -24,7 +24,7 @@ const works = (await getCollection('works')).sort((a, b) => a.data.order - b.dat
     <p class="about-introduction">はじめまして、神山まるごと高専の森川結太です。<br />エンジニアリング・デザイン・アントレプレナーシップを学びながら、<br class="desktop-only" />日々、面白いものをつくっています。</p>
     <div class="about-composition">
       <div class="about-policy"><p>私のポリシーは、</p><h3>「やさしい仕組みを<br />　となりの人に」</h3><p>誰も取り残さない、<br />持続可能なシステムをつくることです。</p></div>
-      <Image class="about-illustration" src={illustration} alt="家族、身近な人、社会へと広がるやさしい仕組みのイメージ" width={1080} loading="lazy" format="webp" />
+      <Image class="about-illustration" src={illustration} alt="家族、身近な人、社会へと広がるやさしい仕組みのイメージ" width={1080} loading="lazy" />
       <p class="about-description">誠実に、となりの人が本当に必要としている<br class="desktop-only" />システムをつくって届ける。<br />そのシステムが長くずっと助けられるような<br class="desktop-only" />ビジネスモデルにする。<br />そういう持続可能で成長していく<br class="desktop-only" />仕組みをつくっていきます。</p>
     </div>
     <ArrowLink href="/profile/" label="私について" />
