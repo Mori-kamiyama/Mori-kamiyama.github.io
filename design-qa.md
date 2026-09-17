@@ -1,6 +1,28 @@
-# Scoped portfolio design QA
+# Portfolio content refinement QA
 
 final result: passed
+
+## Current scope and comparison
+
+The existing visual target is retained. The owner greeting now precedes the About policy; the actual portfolio production record replaces the general AI essay as the recommendation; Home can expand all 16 existing works.
+
+Current-run evidence: `/Users/yuta/.codex/visualizations/2026/09/17/portfolio-refinement/`.
+
+- `comparison.png`: About and Blog before/after pairs inspected together, before on the left. Captures use the normal 544 × 683 CSS-pixel viewport, normalized to that size. About anchor scroll positions differ, so absolute vertical positions are not treated as a pixel comparison.
+- `about-before.png` / `about-after.png`: the greeting is copied from the verified Profile page and appears in normal flow before the policy.
+- `blog-before.png` / `blog-after.png`: production record, date, three-line excerpt and continuation link. The AI essay remains available under “考えたこと”.
+- `article-after.png`: original concept sheet and initial design image embedded in the actual production record.
+- `about-desktop.png`: original illustration/policy composition retained at 1512 × 982; temporary viewport override reset.
+
+Typography and colors retain Figtree / Noto Sans JP and existing tokens. Spacing retains existing gutters and rule lines; the greeting does not overlap the illustration. Assets are the original supplied design materials. No new work, role, result, or personal opinion has been invented.
+
+Pointer activation of “このページで全16件を見る” verified in-app: preview height becomes `none`, 16 cards are present, no horizontal overflow. Keyboard expansion remains persistent. Blog excerpt measured at 92px / 30.8px line-height, approximately three lines, with 246px of complete text. Markdown image syntax is excluded from excerpts.
+
+Local Astro check: zero errors/warnings/hints. Production build verifies 24 HTML files and 792 local URLs. Updated CI regression coverage checks pointer expansion as well as the existing keyboard/full-content routes. Improved visibility does not increase the number of underlying projects; new case studies require real owner-provided material.
+
+## Previous scoped update evidence
+
+The remaining sections record the prior Skills/fade update and its checks, before this content refinement.
 
 ## Target and evidence
 

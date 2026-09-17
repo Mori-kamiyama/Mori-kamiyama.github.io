@@ -27,6 +27,11 @@ test('faded previews keep a visible route to complete content', async ({ page })
   await page.goto('/');
   const preview = page.locator('.works-preview');
   expect(await preview.evaluate(el => el.scrollHeight > el.clientHeight)).toBe(true);
+  await expect(preview.getByRole('link')).toHaveCount(16);
+  await page.getByRole('button', { name: 'このページで全16件を見る' }).click();
+  await expect(preview).toHaveCSS('max-height', 'none');
+  await expect(page.getByRole('button', { name: 'このページで全16件を見る' })).toBeHidden();
+  await page.reload();
   await page.keyboard.press('Tab');
   await preview.getByRole('link').first().focus();
   await expect(preview).toHaveCSS('max-height', 'none');
@@ -41,8 +46,8 @@ test('faded previews keep a visible route to complete content', async ({ page })
   expect(await excerpt.evaluate(el => el.scrollHeight > el.clientHeight)).toBe(true);
   expect(await excerpt.evaluate(el => Math.abs(el.clientHeight / parseFloat(getComputedStyle(el).lineHeight) - 3))).toBeLessThan(0.05);
   await page.getByRole('link', { name: /続きを読む/ }).click();
-  await expect(page).toHaveURL(/\/blog\/programming-with-ai\/$/);
-  await expect(page.getByRole('heading', { name: '言語の壁が溶けるとき' })).toBeVisible();
+  await expect(page).toHaveURL(/\/blog\/portfolio\/$/);
+  await expect(page.getByRole('heading', { name: '新聞から、商品棚へ' })).toBeVisible();
 });
 
 test('all pages render, local assets load, and metadata is complete', async ({ page }) => {

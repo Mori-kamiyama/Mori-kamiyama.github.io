@@ -9,8 +9,7 @@ import Contact from '../components/Contact.astro';
 import BlogSuggestions from '../components/BlogSuggestions.astro';
 import portrait from '../assets/portrait.jpeg';
 import illustration from '../assets/about-illustration.png';
-const works = (await getCollection('works')).sort((a, b) => a.data.order - b.data.order).slice(0, 8);
-const posts = (await getCollection('blog')).filter(p => p.data.date).sort((a,b) => b.data.date!.getTime() - a.data.date!.getTime());
+const works = (await getCollection('works')).sort((a, b) => a.data.order - b.data.order);
 ---
 <Base>
   <section class="hero" aria-labelledby="hero-title">
@@ -22,6 +21,7 @@ const posts = (await getCollection('blog')).filter(p => p.data.date).sort((a,b) 
   </section>
   <section class="section about-section" aria-labelledby="about-title"><div class="container">
     <h2 class="section-title" id="about-title">About me</h2>
+    <p class="about-introduction">はじめまして、神山まるごと高専の森川結太です。<br />エンジニアリング・デザイン・アントレプレナーシップを学びながら、<br class="desktop-only" />日々、面白いものをつくっています。</p>
     <div class="about-composition">
       <div class="about-policy"><p>私のポリシーは、</p><h3>「やさしい仕組みを<br />　となりの人に」</h3><p>誰も取り残さない、<br />持続可能なシステムをつくることです。</p></div>
       <Image class="about-illustration" src={illustration} alt="家族、身近な人、社会へと広がるやさしい仕組みのイメージ" width={1080} loading="lazy" format="webp" />
@@ -35,13 +35,13 @@ const posts = (await getCollection('blog')).filter(p => p.data.date).sort((a,b) 
     <ArrowLink href="/profile/#skills" label="スキルと価値観を見る" />
   </div></section>
   <section class="section works-section" aria-labelledby="works-title"><div class="container">
-    <div class="section-heading"><h2 class="section-title" id="works-title">Works</h2><p>つくったもの、取り組んだこと。</p></div>
-    <div class="works-preview"><div class="works-grid">{works.map(work => <WorkCard work={work} monochrome />)}</div></div>
+    <div class="section-heading"><h2 class="section-title" id="works-title">Works</h2><p>つくったもの、取り組んだこと。<br /><span class="works-count">{works.length} projects</span></p></div>
+    <div class="works-preview" id="home-works"><div class="works-grid">{works.map(work => <WorkCard work={work} monochrome />)}</div></div>
+    <button class="text-link works-expand" type="button" aria-expanded="false" aria-controls="home-works">このページで全{works.length}件を見る</button>
     <ArrowLink href="/works/" label="すべての作品を見る" />
   </div></section>
   <section class="section blog-section" aria-labelledby="blog-title"><div class="container">
     <h2 class="section-title" id="blog-title">Blog</h2>
-    <ul class="post-list">{posts.map(post => <li><a href={`/blog/${post.id}/`}><time datetime={post.data.date!.toISOString()}>{post.data.date!.toLocaleDateString('ja-JP',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'})}</time><span>{post.data.title}</span><span aria-hidden="true">↗</span></a></li>)}</ul>
     <BlogSuggestions heading="h3" />
     <ArrowLink href="/blog/" label="記事を読む" />
   </div></section>
@@ -49,8 +49,14 @@ const posts = (await getCollection('blog')).filter(p => p.data.date).sort((a,b) 
 </Base>
 <script>
   document.querySelectorAll<HTMLElement>('.works-preview').forEach(preview => {
+    const button = document.querySelector<HTMLButtonElement>(`.works-expand[aria-controls="${preview.id}"]`);
+    const expand = () => {
+      preview.classList.add('is-expanded');
+      if (button) { button.setAttribute('aria-expanded', 'true'); button.hidden = true; }
+    };
+    button?.addEventListener('click', expand);
     preview.addEventListener('focusin', () => {
-      if (document.activeElement?.matches('a:focus-visible')) preview.classList.add('is-expanded');
+      if (document.activeElement?.matches('a:focus-visible')) expand();
     });
   });
   document.querySelectorAll<HTMLButtonElement>('.motion-toggle').forEach(button => {

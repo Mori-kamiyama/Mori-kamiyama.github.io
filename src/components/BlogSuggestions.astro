@@ -5,11 +5,12 @@ const { heading = 'h2' } = Astro.props;
 const Heading = heading;
 const ArticleHeading = heading === 'h2' ? 'h3' : 'h4';
 const featured = (await getCollection('blog')).filter(post => post.data.featured);
-const excerpt = (body: string) => body.split(/\n\s*\n/).filter(part => !part.trim().startsWith('#')).slice(0, 5).join(' ').trim();
+const excerpt = (body: string) => body.split(/\n\s*\n/).filter(part => !/^(#|!\[)/.test(part.trim())).slice(0, 5).join(' ').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').trim();
 ---
 <section class="recommended" aria-label="おすすめの記事">
-  <Heading># Recommend</Heading>
+  <Heading>制作の記録</Heading>
   {featured.map(post => <article>
+    {post.data.date && <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' })}</time>}
     <ArticleHeading><a href={`/blog/${post.id}/`}>{post.data.title}</a></ArticleHeading>
     <p class="blog-excerpt">{excerpt(post.body ?? '')}</p>
     <a class="text-link" href={`/blog/${post.id}/`}>続きを読む<span class="sr-only">：{post.data.title}</span></a>
