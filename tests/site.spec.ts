@@ -34,6 +34,7 @@ test('faded previews keep a visible route to complete content', async ({ page })
   expect(await preview.evaluate(el => getComputedStyle(el).maxHeight)).toBe('none');
   await expect(preview.getByRole('link', { name: 'タスク処理支援LINE Botの詳細を見る' })).toBeInViewport();
   await page.getByRole('link', { name: 'すべての作品を見る', exact: true }).click();
+  await expect(page).toHaveURL(/\/works\/$/);
   await expect(page.locator('.work-card:visible')).toHaveCount(16);
   await page.goto('/blog/');
   const excerpt = page.locator('.blog-excerpt');

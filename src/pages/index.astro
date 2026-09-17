@@ -48,6 +48,11 @@ const posts = (await getCollection('blog')).filter(p => p.data.date).sort((a,b) 
   <Contact />
 </Base>
 <script>
+  document.querySelectorAll<HTMLElement>('.works-preview').forEach(preview => {
+    preview.addEventListener('focusin', () => {
+      if (document.activeElement?.matches('a:focus-visible')) preview.classList.add('is-expanded');
+    });
+  });
   document.querySelectorAll<HTMLButtonElement>('.motion-toggle').forEach(button => {
     button.addEventListener('click', () => {
       const section = button.closest<HTMLElement>('.skills-section');
