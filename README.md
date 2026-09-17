@@ -61,4 +61,6 @@ technologies: [TypeScript]
 
 `main` へのpushで、型チェック・ビルド・リンク検証・ブラウザテストを実行し、通過した成果物をGitHub Pagesに公開します。Pull Requestでは検証のみ行います。
 
+公開後、GitHub Actionsの実行結果のSummaryに「サイトを開く」リンクが表示されます。公開URLは毎回同じです: [ポートフォリオを開く](https://mori-kamiyama.github.io/)。
+
 設計判断と参照元は [docs/architecture.md](docs/architecture.md) に記載しています。

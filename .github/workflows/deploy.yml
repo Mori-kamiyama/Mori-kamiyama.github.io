@@ -47,3 +47,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Show published portfolio link
+        env:
+          PORTFOLIO_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          printf '## 公開したポートフォリオ\n\n[サイトを開く](%s)\n' "$PORTFOLIO_URL" >> "$GITHUB_STEP_SUMMARY"
