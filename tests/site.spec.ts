@@ -5,6 +5,24 @@ const workRoutes = readdirSync('src/content/works').filter(f=>f.endsWith('.md'))
 const blogRoutes = readdirSync('src/content/blog').filter(f=>f.endsWith('.md')).map(f=>`/blog/${f.slice(0,-3)}/`);
 const routes = ['/', '/profile/', '/works/', '/blog/', ...workRoutes, ...blogRoutes];
 
+test('each blog shares its own full-size PNG card on social networks', async ({ page, request }) => {
+  for (const route of blogRoutes) {
+    await page.goto(route);
+    const imagePath = `/og${route.slice(0, -1)}.png`;
+    const imageUrl = `https://mori-kamiyama.github.io${imagePath}`;
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', imageUrl);
+    await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', imageUrl);
+    await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute('content', '1200');
+    await expect(page.locator('meta[property="og:image:height"]')).toHaveAttribute('content', '630');
+    const response = await request.get(imagePath);
+    expect(response.status()).toBe(200);
+    const png = await response.body();
+    expect(png.subarray(0, 8).toString('hex')).toBe('89504e470d0a1a0a');
+    expect(png.readUInt32BE(16)).toBe(1200);
+    expect(png.readUInt32BE(20)).toBe(630);
+  }
+});
+
 test('skills motion can stop and resume, and reduced motion stays readable', async ({ page }) => {
   await page.goto('/');
   const tracks = page.locator('.marquee-track');

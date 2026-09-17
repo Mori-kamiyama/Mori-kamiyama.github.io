@@ -57,6 +57,8 @@ technologies: [TypeScript]
 
 この後に本文をMarkdownで書きます。カテゴリーは `Program`、`Design`、`Management` です。記事の `date` は任意、`featured: true` はBlogのRecommend欄に表示します。RSSには日付付き記事を掲載します。
 
+記事のSNSカードはビルド時にタイトルから自動生成します（1200 × 630 PNG、`/og/blog/記事ID.png`）。白地に `<portfolio/>`、`#記事タイトル`、`森川結太 / Blog` を配置します。改行を指定したい場合だけ、記事のfrontmatterに `ogTitle: "1行目\n2行目"` を追加してください。通常は `title` がそのまま使われます。フォントとOFLライセンスは `src/assets/og-fonts/` に同梱し、ビルド時の外部フォント取得は不要です。
+
 ## 公開
 
 `main` へのpushで、型チェック・ビルド・リンク検証・ブラウザテストを実行し、通過した成果物をGitHub Pagesに公開します。Pull Requestでは検証のみ行います。

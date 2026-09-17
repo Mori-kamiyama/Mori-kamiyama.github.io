@@ -61,3 +61,11 @@ Focused comparison uses the readable Skills icons/control and Blog title/body/li
 - Reduced-motion behavior is specified in CSS and covered by the CI browser test; screenshots alone do not establish full accessibility compliance.
 
 No actionable P0/P1/P2 visual issue remains within this update's scope. Information architecture improvements remain discussion items in `docs/portfolio-design-review.md`; they require verified owner-provided content.
+
+## Approved article sharing cards
+
+The owner approved the two article-card previews on 2026-09-17. The production PNGs retain their white canvas, black type, top-left `<portfolio/>`, central `#` heading and bottom-left author. Both generated 1200 × 630 images were visually compared with the approved previews; spacing and line breaks match the intended composition, with no missing Japanese glyphs or clipped text.
+
+Each blog page now references its own static PNG in Open Graph and Twitter metadata. Sharp, already used by Astro, renders bundled OFL fonts during the build; the full fonts are build inputs and do not increase browser font downloads. Optional `ogTitle` only controls card line breaks; article titles remain unchanged. New articles get cards from `title` automatically. The common Figma cover remains the default for other pages.
+
+Local Astro checks passed with zero errors/warnings, and the built site's 29 HTML files and 966 local URLs passed validation. CI additionally checks each article's image URL, PNG signature and 1200 × 630 dimensions on desktop and mobile. No actionable visual issue remains within this card update's scope.

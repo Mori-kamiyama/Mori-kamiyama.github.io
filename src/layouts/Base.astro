@@ -7,12 +7,12 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
-interface Props { title?: string; description?: string; article?: boolean; }
-const { title, description = site.description, article = false } = Astro.props;
+interface Props { title?: string; description?: string; article?: boolean; image?: string; imageAlt?: string; }
+const { title, description = site.description, article = false, image = '/og.png', imageAlt = '森川結太のポートフォリオ' } = Astro.props;
 const pageTitle = title ? `${title} | ${site.title}` : site.title;
 const isNotFound = Astro.url.pathname === '/404/' || Astro.url.pathname === '/404.html';
 const canonical = new URL(isNotFound ? '/404.html' : Astro.url.pathname, Astro.site);
-const ogImage = new URL('/og.png', Astro.site);
+const ogImage = new URL(image, Astro.site);
 const jsonLd = { '@context': 'https://schema.org', '@type': 'Person', name: site.name, alternateName: site.englishName, url: Astro.site?.toString(), sameAs: ['https://github.com/Mori-kamiyama', 'https://x.com/mori_kamiyama', 'https://zenn.dev/mori_mino'] };
 ---
 <!doctype html>
@@ -27,8 +27,11 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Person', name: site
     <meta property="og:type" content={article ? 'article' : 'website'} /><meta property="og:locale" content="ja_JP" />
     <meta property="og:title" content={pageTitle} /><meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} /><meta property="og:site_name" content={site.title} />
-    <meta property="og:image" content={ogImage} /><meta property="og:image:alt" content="森川結太のポートフォリオ" />
+    <meta property="og:image" content={ogImage} /><meta property="og:image:alt" content={imageAlt} />
+    <meta property="og:image:width" content={article ? '1200' : '384'} /><meta property="og:image:height" content={article ? '630' : '216'} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} /><meta name="twitter:image:alt" content={imageAlt} />
+    <meta name="twitter:title" content={pageTitle} /><meta name="twitter:description" content={description} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body><Header /><main id="main" tabindex="-1"><slot /></main><Footer /></body>

@@ -25,6 +25,7 @@ const blog = defineCollection({
     description: z.string(),
     date: z.coerce.date().optional(),
     featured: z.boolean().default(false),
+    ogTitle: z.string().optional(),
   }),
 });
 export const collections = { works, blog };
