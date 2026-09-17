@@ -205,6 +205,13 @@ main:focus { outline: none; }
 .blog-detail { max-width: 760px; margin: 0 auto 60px; }
 .blog-detail > time { color: var(--muted); font-size: 14px; }
 .blog-detail > h1 { font-size: clamp(28px,3vw,44px); line-height: 1.6; margin-top: 16px; }
+.blog-detail > h1::before,.blog-detail .prose h1::before,.recommended article h3::before,.recommended article h4::before,.blog-notes h3::before { content: "#" / ""; }
+.blog-detail .prose h2::before { content: "##" / ""; }
+.blog-detail .prose h3::before { content: "###" / ""; }
+.blog-detail .prose h4::before { content: "####" / ""; }
+.blog-detail .prose h5::before { content: "#####" / ""; }
+.blog-detail .prose h6::before { content: "######" / ""; }
+.blog-detail :is(h1,h2,h3,h4,h5,h6)::before,.recommended article :is(h3,h4)::before,.blog-notes h3::before { font-family: ui-monospace, monospace; }
 .blog-detail > .text-link { margin-top: 60px; }
 .not-found { padding-block: 60px 120px; }
 .error-number { font-size: 100px; font-weight: 500; letter-spacing: -.05em; }
