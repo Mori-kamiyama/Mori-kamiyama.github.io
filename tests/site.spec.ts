@@ -55,6 +55,12 @@ test('all pages render, local assets load, and metadata is complete', async ({ p
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content',/.+/);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href',`https://mori-kamiyama.github.io${route}`);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`overflow on ${route}`).toBe(true);
+    // Inspect every image in the keyboard-expanded Home preview, including lazy images below the fade.
+    if (route === '/') {
+      await page.keyboard.press('Tab');
+      await page.locator('.works-preview a').first().focus();
+      await expect(page.locator('.works-preview')).toHaveCSS('max-height', 'none');
+    }
     for (const image of await page.locator('img').all()) {
       await image.scrollIntoViewIfNeeded();
       await expect.poll(()=>image.evaluate((img:HTMLImageElement)=>img.complete&&img.naturalWidth>0),{message:`image failed on ${route}`}).toBe(true);
