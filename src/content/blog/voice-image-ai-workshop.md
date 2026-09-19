@@ -175,7 +175,7 @@ uv add gradio==6.28.0 httpx pillow
 import gradio as gr
 import httpx
 
-API = "https://capture-marco-sphere-dubai.trycloudflare.com"
+API = "https://workshop-api.toromino.net"
 
 
 def generate(instruction, text):
@@ -293,7 +293,7 @@ return r.json()["text"]
 import gradio as gr
 import httpx
 
-API = "https://capture-marco-sphere-dubai.trycloudflare.com"
+API = "https://workshop-api.toromino.net"
 
 
 def transcribe(audio_path):
@@ -389,7 +389,7 @@ import gradio as gr
 import httpx
 from PIL import Image
 
-API = "https://capture-marco-sphere-dubai.trycloudflare.com"
+API = "https://workshop-api.toromino.net"
 
 
 def generate(prompt):
@@ -507,7 +507,7 @@ import gradio as gr
 import httpx
 from PIL import Image
 
-API = "https://capture-marco-sphere-dubai.trycloudflare.com"
+API = "https://workshop-api.toromino.net"
 
 
 def transcribe(audio_path):
