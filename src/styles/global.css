@@ -172,7 +172,18 @@ main:focus { outline: none; }
 .prose a { text-decoration: underline; text-underline-offset: 4px; }
 .prose ul { list-style: disc; padding-left: 24px; }
 .prose img { margin-inline: auto; }
+.prose img[alt='Gradio'] { width: min(260px,70%); }
 .prose blockquote { margin-inline: 0; padding-left: 24px; border-left: 2px solid var(--ink); }
+.prose :not(pre) > code { padding: 2px 6px; background: var(--wash); font-size: .9em; }
+.prose pre { overflow-x: auto; padding: 20px; background: var(--wash); border: 1px solid var(--soft-rule); font-size: 13px; line-height: 1.7; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.7; }
+.prose th,.prose td { padding: 10px 12px; border: 1px solid var(--soft-rule); text-align: left; vertical-align: top; }
+.article-accordion { border-block: 1px solid var(--soft-rule); }
+.article-accordion summary { padding: 16px 4px; cursor: pointer; font-weight: 500; }
+.article-accordion summary:hover { color: var(--muted); }
+.article-accordion summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.article-accordion[open] summary { border-bottom: 1px solid var(--soft-rule); }
+.article-accordion > :not(summary) { margin: 20px 0; }
 .gallery { margin-top: 80px; }
 .gallery h2 { font-size: 26px; margin-bottom: 32px; }
 .gallery > div { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 24px; }
