@@ -22,7 +22,7 @@ AIの料金を比べるとき、僕が知りたいのは「同じお金で、ど
 
 評価対象はモデル単体ではなく、CodexまたはClaude Codeとモデル・推論設定の組み合わせだ。以下は2026年10月6日に確認した値。
 
-<div style="overflow-x:auto">
+<div style="overflow-x:auto" tabindex="0" role="region" aria-label="モデル別ベンチマーク結果。狭い画面では横にスクロールできます。">
 
 | エージェント / モデル | 設定 | DeepSWE | Terminal | Atlas | API費用 / 試行 |
 | --- | --- | ---: | ---: | ---: | ---: |
