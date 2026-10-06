@@ -1,0 +1,79 @@
+{
+  "retrieved": "2026-10-06",
+  "counts": [
+    113,
+    66,
+    124
+  ],
+  "note": "Rounded published scores; pooled rate reconstructed assuming all attempts have cost telemetry. Monthly values are workload-transfer scenarios, not measured subscription throughput. Luna budget is unknown.",
+  "rows": [
+    {
+      "name": "GPT-6 Luna",
+      "effort": "max",
+      "scores": [
+        64,
+        15,
+        44
+      ],
+      "cost": 0.18,
+      "minutes": 21.4,
+      "budget": null,
+      "p": 0.4514191419141915,
+      "perDollar": 2.5078841217455086,
+      "costPerSuccess": 0.3987425062143587,
+      "perHour": 1.265661145553808,
+      "monthly": null
+    },
+    {
+      "name": "GPT-6.1 Sol",
+      "effort": "xhigh",
+      "scores": [
+        73,
+        55,
+        61
+      ],
+      "cost": 1.04,
+      "minutes": 15.5,
+      "budget": 2084,
+      "p": 0.6416831683168317,
+      "perDollar": 0.617003046458492,
+      "costPerSuccess": 1.6207375405030089,
+      "perHour": 2.483934845097413,
+      "monthly": 1285.8343488194973
+    },
+    {
+      "name": "Claude Opus 5.5",
+      "effort": "max",
+      "scores": [
+        68,
+        63,
+        66
+      ],
+      "cost": 13.04,
+      "minutes": 66,
+      "budget": 11726,
+      "p": 0.6609240924092409,
+      "perDollar": 0.05068436291481909,
+      "costPerSuccess": 19.729951063617296,
+      "perHour": 0.6008400840084008,
+      "monthly": 594.3248395391686
+    },
+    {
+      "name": "Claude Sonnet 5.5",
+      "effort": "max",
+      "scores": [
+        72,
+        66,
+        67
+      ],
+      "cost": 14.19,
+      "minutes": 90,
+      "budget": 12529,
+      "p": 0.6864686468646864,
+      "perDollar": 0.04837693071632745,
+      "costPerSuccess": 20.671009615384616,
+      "perHour": 0.45764576457645767,
+      "monthly": 606.1145649448666
+    }
+  ]
+}
