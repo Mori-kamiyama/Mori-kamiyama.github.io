@@ -4,10 +4,13 @@
   "description": "森川結太のポートフォリオ — Astro static site",
   "scripts": {
     "dev": "astro dev",
-    "check": "astro check",
+    "check": "npm run test:publisher && astro check",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "playwright test"
+    "test": "playwright test",
+    "blog:server": "node --env-file-if-exists=.env.blog scripts/blog-publisher/server.mjs",
+    "blog:post": "node --env-file-if-exists=.env.blog scripts/blog-publisher/post.mjs",
+    "test:publisher": "node --test scripts/blog-publisher/server.test.mjs"
   },
   "repository": {
     "type": "git",
@@ -27,6 +30,7 @@
     "@fontsource/noto-sans-jp": "^5.3.0",
     "astro": "^7.3.3",
     "sharp": "0.35.4",
+    "yaml": "2.9.1",
     "zod": "^4.6.5"
   },
   "devDependencies": {
