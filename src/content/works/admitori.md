@@ -1,4 +1,5 @@
 ---
+draft: false
 title: "Admitori"
 description: "B2Bサービスの学生起業を目指したプロジェクト。iOSアプリの制作や、開発チームを指揮する経験を得ました。"
 year: 2025

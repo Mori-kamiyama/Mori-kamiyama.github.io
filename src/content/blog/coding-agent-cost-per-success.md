@@ -1,4 +1,5 @@
 ---
+draft: false
 title: Claudeは5倍お得？ そもそも、そのAPIが高すぎないか
 ogTitle: "Claudeは5倍お得？\nそもそも、そのAPIが高すぎないか"
 description: ClaudeのサブスクはChatGPTより5倍お得。でも、その換算に使ったAPI自体が高かったら？ 公開コーディング評価から、同じお金で何件の仕事を終えられるかを計算し直しました。

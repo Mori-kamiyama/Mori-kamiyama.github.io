@@ -1,4 +1,5 @@
 ---
+draft: false
 title: 声から画像を作るAIワークショップ
 ogTitle: "声から画像を作る\nAIワークショップ"
 description: 音声認識、文章生成、画像生成の三つのAIをGradioでつなぎ、声から画像を作るアプリを段階的に制作する教材です。

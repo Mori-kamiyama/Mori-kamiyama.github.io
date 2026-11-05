@@ -53,6 +53,13 @@ test('rejects traversal, malformed metadata, invalid date and duplicate filename
 test('auth fails before GitHub calls', async t => {
   const {send,calls}=await running(t); assert.equal((await send(form(),'wrong')).status,401); assert.equal(calls.length,0);
 });
+test('accepts draft metadata written by the browser editor and rejects invalid flags', async () => {
+  for (const value of [true, false]) {
+    const post = await prepare(form(markdown.replace('title: Test', `draft: ${value}\ntitle: Test`)));
+    assert.match(post.files[0].bytes.toString(), new RegExp(`draft: ${value}`));
+  }
+  await assert.rejects(prepare(form(markdown.replace('title: Test', 'draft: "false"\ntitle: Test'))), {status:400});
+});
 test('article and binary image commit atomically over the existing tree', async t => {
   const {send,calls}=await running(t);
   const f=form();f.append('images',new Blob([new Uint8Array([137,80,78,71,0,255])]),'chart.png');

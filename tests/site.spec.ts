@@ -1,9 +1,30 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { readdirSync } from 'node:fs';
-const workRoutes = readdirSync('src/content/works').filter(f=>f.endsWith('.md')).map(f=>`/works/${f.slice(0,-3)}/`);
-const blogRoutes = readdirSync('src/content/blog').filter(f=>f.endsWith('.md')).map(f=>`/blog/${f.slice(0,-3)}/`);
+import { readdirSync, readFileSync } from 'node:fs';
+import { parse } from 'yaml';
+const isDraft = (path: string) => parse(readFileSync(path, 'utf8').split('---')[1] ?? '')?.draft === true;
+const contentRoutes = (collection: string, draft: boolean) => readdirSync(`src/content/${collection}`).filter(f=>f.endsWith('.md') && isDraft(`src/content/${collection}/${f}`) === draft).map(f=>`/${collection}/${f.slice(0,-3)}/`);
+const workRoutes = contentRoutes('works', false);
+const blogRoutes = contentRoutes('blog', false);
 const routes = ['/', '/profile/', '/works/', '/blog/', ...workRoutes, ...blogRoutes];
+
+test('drafts have no public pages, cards, sitemap entries or social images', async ({ page, request }) => {
+  const draftRoutes = [...contentRoutes('works', true), ...contentRoutes('blog', true)];
+  for (const route of draftRoutes) {
+    expect((await request.get(route)).status()).toBe(404);
+    if (route.startsWith('/blog/')) expect((await request.get(`/og${route.slice(0, -1)}.png`)).status()).toBe(404);
+  }
+  const sitemap = await (await request.get('/sitemap-0.xml')).text();
+  const feed = await (await request.get('/rss.xml')).text();
+  for (const route of draftRoutes) {
+    expect(sitemap).not.toContain(route);
+    expect(feed).not.toContain(route);
+  }
+  for (const route of ['/', '/works/', '/blog/', '/works/portfolio/']) {
+    await page.goto(route);
+    for (const draft of draftRoutes) await expect(page.locator(`a[href="${draft}"]`)).toHaveCount(0);
+  }
+});
 
 test('each blog shares its own full-size PNG card on social networks', async ({ page, request }) => {
   for (const route of blogRoutes) {

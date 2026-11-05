@@ -1,12 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
 import WorkCard from '../../components/WorkCard.astro';
-import { getCollection } from 'astro:content';
-const works = (await getCollection('works')).sort((a,b)=>a.data.order-b.data.order);
+import { getWorks } from '../../lib/content';
+const works = (await getWorks()).sort((a,b)=>a.data.order-b.data.order);
+const categories = ['Program', 'Design', 'Management', 'Research', 'Education', 'Video', 'Planning'].filter(category => works.some(work => work.data.categories.some(value => value === category)));
 ---
-<Base title="Works" description="プログラミング・デザイン・マネジメント。森川結太がつくったものと取り組んだプロジェクトをご紹介します。">
+<Base title="Works" description="アプリ、デザイン、研究、企画やものづくり。森川結太がつくったものと取り組んできた活動をご紹介します。">
   <div class="container page-content">
-    <div class="works-heading"><h1 class="page-title"># Works</h1><div class="filter-list" aria-label="作品のカテゴリー"><button type="button" data-filter="All" aria-pressed="true">All</button>{['Program','Design','Management'].map(category=><button type="button" data-filter={category} aria-pressed="false">{category}</button>)}</div></div>
+    <div class="works-heading"><h1 class="page-title"># Works</h1><div class="filter-list" aria-label="作品のカテゴリー"><button type="button" data-filter="All" aria-pressed="true">All</button>{categories.map(category=><button type="button" data-filter={category} aria-pressed="false">{category}</button>)}</div></div>
     <p class="works-introduction">つくったもの、取り組んだこと。<span id="work-count" role="status" aria-live="polite">全{works.length}件</span></p>
     <div class="works-grid" id="work-grid">{works.map(work=><WorkCard work={work} />)}</div>
   </div>

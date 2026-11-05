@@ -2,7 +2,7 @@
 
 ## 採用した構成
 
-Astro 7 / TypeScript / CSS / Markdown。静的HTMLを生成し、GitHub ActionsからGitHub Pagesへ公開する。メニューと作品の絞り込みにのみJavaScriptを使う。ReactやCMSは現時点では必要ない。
+Astro 7 / TypeScript / CSS / Markdown。静的HTMLを生成し、GitHub ActionsからGitHub Pagesへ公開する。メニューと作品の絞り込みにのみJavaScriptを使う。2026-11-05にブラウザから文章・画像を編集する要望を受け、本人の承認のもとPages CMSを接続した。CMSはGitHub上のファイルを編集するため、サイト側の管理サーバーやReactは追加しない。対象はこのポートフォリオ1件に限定。選定と運用は [編集ガイド](content-editing.md) を参照。
 
 HugoもMarkdown、分類、画像処理、単一実行ファイルを備え、この用途に十分対応できる。今回は独自のFigmaデザインに沿ったUIをHTMLに近いコンポーネントで組み、TypeScriptの操作コードと同じ環境で管理するためAstroを選んだ。ビルド速度が選定理由ではない。今後の記事数が増えても静的生成を継続する想定。
 

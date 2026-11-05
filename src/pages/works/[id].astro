@@ -1,23 +1,25 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
+import { getWorks } from '../../lib/content';
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import WorkCard from '../../components/WorkCard.astro';
 export async function getStaticPaths() {
-  return (await getCollection('works')).map(work=>({params:{id:work.id},props:{work}}));
+  return (await getWorks()).map(work=>({params:{id:work.id},props:{work}}));
 }
 interface Props { work: CollectionEntry<'works'>; }
 const { work } = Astro.props;
 const { Content } = await render(work);
-const others = (await getCollection('works')).filter(w=>w.id!==work.id).sort((a,b)=>b.data.categories.filter(c=>work.data.categories.includes(c)).length-a.data.categories.filter(c=>work.data.categories.includes(c)).length || a.data.order-b.data.order).slice(0,3);
+const others = (await getWorks()).filter(w=>w.id!==work.id).sort((a,b)=>b.data.categories.filter(c=>work.data.categories.includes(c)).length-a.data.categories.filter(c=>work.data.categories.includes(c)).length || a.data.order-b.data.order).slice(0,3);
 ---
 <Base title={work.data.title} description={work.data.description} article>
   <div class="container detail-page">
     <nav class="breadcrumb" aria-label="パンくず"><a href="/works/">Works</a><span aria-hidden="true">&gt;</span><span aria-current="page">{work.data.title}</span></nav>
     <article class="work-detail">
-      <Image class:list={['detail-cover', { contain: work.data.imageFit === 'contain' }]} src={work.data.cover} widths={[600,1000,1400]} sizes="(max-width: 760px) 90vw, 800px" width={1000} alt={work.data.coverAlt} loading="eager" fetchpriority="high" format="webp" />
-      <div class="detail-meta"><span>{work.data.year}</span><span>{work.data.categories.join(' / ')}</span></div>
+      {work.data.draft && <p class="draft-notice">下書き — ローカルでの確認用です。公開サイトには表示されません。</p>}
+      {work.data.cover && <Image class:list={['detail-cover', { contain: work.data.imageFit === 'contain' }]} src={work.data.cover} widths={[600,1000,1400]} sizes="(max-width: 760px) 90vw, 800px" width={1000} alt={work.data.coverAlt} loading="eager" fetchpriority="high" format="webp" />}
+      <div class="detail-meta">{work.data.year && <span>{work.data.year}</span>}<span>{work.data.categories.join(' / ')}</span></div>
       <h1># {work.data.title}</h1><p class="detail-description">{work.data.description}</p>
       {work.data.technologies.length>0&&<ul class="technology-list" aria-label="使用技術">{work.data.technologies.map(t=><li>{t}</li>)}</ul>}
       <div class="prose"><Content /></div>

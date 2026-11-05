@@ -1,4 +1,5 @@
 ---
+draft: false
 title: "Nowing"
 description: "やることより、やったことを。学校課題として、取り組みを記録するToDoアプリをデザインしました。"
 year: 2025

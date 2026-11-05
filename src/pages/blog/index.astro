@@ -1,14 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { getCollection } from 'astro:content';
+import { getPosts } from '../../lib/content';
 import BlogSuggestions from '../../components/BlogSuggestions.astro';
-const posts = await getCollection('blog');
+const posts = await getPosts();
 const otherPosts = posts.filter(post => !post.data.featured);
 ---
 <Base title="Blog"><div class="container page-content blog-index">
   <h1 class="page-title"># Blog</h1>
   <p class="blog-introduction">つくったものの裏側と、<br />プログラミングについて考えたこと。</p>
   <BlogSuggestions />
-  {otherPosts.length > 0 && <section class="blog-notes" aria-labelledby="notes-title"><h2 id="notes-title">考えたこと</h2>{otherPosts.map(post => <article><h3><a href={`/blog/${post.id}/`}>{post.data.title}<span aria-hidden="true"> ↗</span></a></h3><p>{post.data.description}</p></article>)}</section>}
+  {otherPosts.length > 0 && <section class="blog-notes" aria-labelledby="notes-title"><h2 id="notes-title">考えたこと</h2>{otherPosts.map(post => <article><h3><a href={`/blog/${post.id}/`}>{post.data.title}{post.data.draft && '（下書き）'}<span aria-hidden="true"> ↗</span></a></h3><p>{post.data.description}</p></article>)}</section>}
   <a class="external-reading" href="https://zenn.dev/mori_mino" target="_blank" rel="noopener noreferrer"><span>技術の記事はZennでも書いています。</span><span>Zenn ↗</span><span class="sr-only">（新しいタブで開きます）</span></a>
 </div></Base>

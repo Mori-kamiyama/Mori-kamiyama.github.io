@@ -1,10 +1,10 @@
 import type { APIRoute } from 'astro';
-import { getCollection } from 'astro:content';
+import { getPosts } from '../../../lib/content';
 import sharp from 'sharp';
 import { resolve } from 'node:path';
 
 export async function getStaticPaths() {
-  return (await getCollection('blog')).map(post => ({
+  return (await getPosts()).map(post => ({
     params: { id: post.id }, props: { title: post.data.ogTitle ?? post.data.title },
   }));
 }

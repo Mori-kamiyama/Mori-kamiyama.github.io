@@ -1,0 +1,246 @@
+media:
+  - name: images
+    label: 画像
+    input: src/assets
+    output: ../../assets
+    extensions: [jpg, jpeg, png, webp, svg]
+    rename: safe
+
+settings:
+  content:
+    merge: true
+
+content:
+  - name: works
+    label: 作品・活動
+    type: collection
+    path: src/content/works
+    format: yaml-frontmatter
+    filename:
+      template: '{primary}.md'
+      field: create
+    view:
+      primary: title
+      fields: [title, draft, year, categories, order]
+      sort: [order, title, year]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: title
+        label: タイトル
+        type: string
+        required: true
+      - name: description
+        label: 一覧に載せる短い説明
+        type: text
+        required: true
+      - name: draft
+        label: 下書き（オンの間は公開されません）
+        type: boolean
+        default: true
+      - name: year
+        label: 制作・活動した年（任意）
+        type: number
+      - name: order
+        label: 掲載順（小さいほど先頭）
+        type: number
+        required: true
+        default: 100
+      - name: categories
+        label: 分野
+        type: select
+        required: true
+        options:
+          multiple: true
+          min: 1
+          values:
+            - { value: Program, label: プログラミング }
+            - { value: Design, label: デザイン・ものづくり }
+            - { value: Management, label: 運営・マネジメント }
+            - { value: Research, label: 研究・調査 }
+            - { value: Education, label: 教材・ワークショップ }
+            - { value: Video, label: 映像 }
+            - { value: Planning, label: 企画・政策提案 }
+      - name: cover
+        label: 表紙画像
+        type: image
+        options:
+          media: images
+      - name: coverAlt
+        label: 表紙画像の説明
+        type: string
+        description: 画像が見えないときにも内容が伝わる説明を書いてください。
+      - name: imageFit
+        label: 表紙の表示方法
+        type: select
+        default: cover
+        options:
+          values:
+            - { value: cover, label: 枠いっぱいに表示 }
+            - { value: contain, label: 画像全体を表示 }
+      - name: technologies
+        label: 使ったツール・技術
+        type: string
+        list: true
+        description: Figma、Illustrator、取材など、コード以外の道具や手法も書けます。
+      - name: body
+        label: 本文
+        type: rich-text
+        options:
+          format: markdown
+          media: images
+      - name: gallery
+        label: 制作物・制作過程の画像
+        type: object
+        list: true
+        fields:
+          - name: image
+            label: 画像
+            type: image
+            required: true
+            options:
+              media: images
+          - name: alt
+            label: 画像の説明
+            type: string
+            required: true
+          - name: caption
+            label: 画像に添える文章
+            type: text
+            required: true
+      - name: links
+        label: 関連リンク
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: リンクの名前
+            type: string
+            required: true
+          - name: url
+            label: URL
+            type: string
+            required: true
+            pattern: '^https?://.+'
+
+  - name: blog
+    label: 記事
+    type: collection
+    path: src/content/blog
+    format: yaml-frontmatter
+    filename:
+      template: '{primary}.md'
+      field: create
+    view:
+      primary: title
+      fields: [title, draft, date, featured]
+    fields:
+      - name: title
+        label: タイトル
+        type: string
+        required: true
+      - name: description
+        label: 記事の短い説明
+        type: text
+        required: true
+      - name: draft
+        label: 下書き（オンの間は公開されません）
+        type: boolean
+        default: true
+      - name: date
+        label: 公開日
+        type: date
+      - name: featured
+        label: Homeのおすすめに表示
+        type: boolean
+        default: false
+      - name: ogTitle
+        label: SNS画像用のタイトル（任意）
+        type: text
+      - name: body
+        label: 本文
+        type: rich-text
+        description: コードや折りたたみを含む既存記事はSourceモードで編集すると元の記法を保てます。
+        options:
+          format: markdown
+          media: images
+
+  - name: profile
+    label: 自己紹介（Home・Profile共通）
+    type: file
+    path: src/content/pages/profile.md
+    format: yaml-frontmatter
+    fields:
+      - name: portrait
+        label: プロフィール写真
+        type: image
+        required: true
+        options:
+          media: images
+      - name: portraitAlt
+        label: 写真の説明
+        type: string
+        required: true
+      - name: tags
+        label: 写真の下のキーワード
+        type: string
+        list: true
+      - name: introduction
+        label: 自己紹介
+        type: text
+        required: true
+      - name: hometown
+        label: 出身
+        type: string
+        required: true
+      - name: history
+        label: 経歴
+        type: object
+        list: true
+        fields:
+          - name: year
+            label: 年
+            type: string
+            required: true
+          - name: event
+            label: 出来事
+            type: string
+            required: true
+      - name: policyLead
+        label: ポリシーの前置き
+        type: string
+        required: true
+      - name: policyTitle
+        label: ポリシー
+        type: text
+        required: true
+      - name: policySummary
+        label: ポリシーの短い説明
+        type: text
+        required: true
+      - name: policyDescription
+        label: ポリシーの詳しい説明
+        type: text
+        required: true
+      - name: skillsIntroduction
+        label: プログラミングの紹介文
+        type: text
+        required: true
+      - name: designIntroduction
+        label: デザインの紹介文
+        type: text
+        required: true
+      - name: values
+        label: 価値観
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: 見出し
+            type: string
+            required: true
+          - name: text
+            label: 説明
+            type: text
+            required: true

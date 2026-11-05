@@ -29,8 +29,9 @@ export async function prepare(form) {
   if (meta.title.length > 160 || meta.description.length > 1000) fail(400, 'Title or description is too long');
   if (meta.date !== undefined && (typeof meta.date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(meta.date) || !Number.isFinite(Date.parse(meta.date)) || new Date(meta.date).toISOString().slice(0,10) !== meta.date)) fail(400, 'date must be a valid YYYY-MM-DD');
   if (meta.featured !== undefined && typeof meta.featured !== 'boolean') fail(400, 'featured must be boolean');
+  if (meta.draft !== undefined && typeof meta.draft !== 'boolean') fail(400, 'draft must be boolean');
   if (meta.ogTitle !== undefined && typeof meta.ogTitle !== 'string') fail(400, 'ogTitle must be text');
-  for (const k of Object.keys(meta)) if (!['title','description','date','featured','ogTitle'].includes(k)) fail(400, `Unknown frontmatter field: ${k}`);
+  for (const k of Object.keys(meta)) if (!['title','description','date','featured','ogTitle','draft'].includes(k)) fail(400, `Unknown frontmatter field: ${k}`);
   let body = match[2];
   const images = form.getAll('images');
   if (images.length > 20) fail(400, 'Maximum 20 images');
@@ -92,7 +93,7 @@ export function makeHandler({ githubToken, publishToken, fetchImpl = fetch }) {
       const entries = new Map(tree.tree.map(e => [e.path, e]));
       const previous = entries.get(post.files[0].path);
       const unchanged = post.files.every(f => entries.get(f.path)?.sha === gitHash(f.bytes));
-      const result = sha => ({ slug: post.slug, commit: sha, articleSha: gitHash(post.files[0].bytes), url: `${SITE}/blog/${post.slug}/`, actionsUrl: `https://github.com/${REPO}/actions?query=branch%3Amain`, status: 'committed', note: 'Publication follows successful GitHub Actions; this response is not deployment confirmation.' });
+      const result = sha => ({ slug: post.slug, commit: sha, articleSha: gitHash(post.files[0].bytes), url: `${SITE}/blog/${post.slug}/`, actionsUrl: `https://github.com/${REPO}/actions?query=branch%3Amain`, status: 'committed', note: 'Non-draft articles are published after successful GitHub Actions; this response is not deployment confirmation.' });
       if (unchanged) return json(200, { ...result(parent), unchanged: true });
       if (previous && post.expectedSha !== previous.sha) fail(409, 'Article exists or changed. GET /posts/:slug and supply expectedSha to update');
       if (!previous && post.expectedSha) fail(409, 'Article no longer exists');

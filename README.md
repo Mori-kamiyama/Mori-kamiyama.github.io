@@ -32,9 +32,11 @@ PLAYWRIGHT_BASE_URL=https://mori-kamiyama.github.io npm test
 
 ## 内容を更新する
 
+ブラウザからの編集にはPages CMSを使います。作品・活動、記事、自己紹介、画像の編集設定を `.pages.yml` に用意しています。初回のGitHub接続と日々の更新方法は [編集ガイド](docs/content-editing.md) を参照してください。
+
 - 作品: `src/content/works/*.md`
 - 記事: `src/content/blog/*.md`
-- プロフィール: `src/pages/profile.astro`
+- 自己紹介・写真・経歴・価値観: `src/content/pages/profile.md`（HomeとProfileで共通）
 - SNSリンク: `src/data/site.ts`
 - デザイン: `src/styles/global.css`
 - 画像: `src/assets/`
@@ -48,6 +50,7 @@ description: 作品の短い説明
 year: 2026
 order: 17
 categories: [Program, Design]
+draft: true
 cover: ../../assets/example.webp
 coverAlt: 画像の説明
 imageFit: cover
@@ -55,7 +58,9 @@ technologies: [TypeScript]
 ---
 ```
 
-この後に本文をMarkdownで書きます。カテゴリーは `Program`、`Design`、`Management` です。記事の `date` は任意、`featured: true` はBlogのRecommend欄に表示します。RSSには日付付き記事を掲載します。
+この後に本文をMarkdownで書きます。カテゴリーは `Program`、`Design`、`Management`、`Research`、`Education`、`Video`、`Planning` です。画像なしでも追加できます。`draft: true` は開発画面だけに表示し、公開ビルドには含めません。既存作品で `draft` を省略した場合は公開扱いです。
+
+記事の `date` は任意、`featured: true` はBlogのRecommend欄に表示します。RSSには公開済みの日付付き記事を掲載します。記事も `draft: true` で下書きにできます。
 
 記事のSNSカードはビルド時にタイトルから自動生成します（1200 × 630 PNG、`/og/blog/記事ID.png`）。白地に `<portfolio/>`、`#記事タイトル`、`森川結太 / Blog` を配置します。改行を指定したい場合だけ、記事のfrontmatterに `ogTitle: "1行目\n2行目"` を追加してください。通常は `title` がそのまま使われます。フォントとOFLライセンスは `src/assets/og-fonts/` に同梱し、ビルド時の外部フォント取得は不要です。
 

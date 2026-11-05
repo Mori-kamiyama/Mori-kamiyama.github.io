@@ -87,7 +87,7 @@ BLOG_EXPECTED_SHA=取得したsha npm run blog:post -- my-article article.md
 
 ## 入力と運用
 
-- Markdown：YAML frontmatter付き、最大256 KiB。`title`・`description` 必須。任意項目は `date`・`featured`・`ogTitle`。
+- Markdown：YAML frontmatter付き、最大256 KiB。`title`・`description` 必須。任意項目は `date`・`featured`・`ogTitle`・`draft`。`draft: true` はサイトへの公開対象から外れます。
 - 画像：PNG / JPEG / WebP / GIF / SVG、1枚5 MiB以下、最大20枚。全送信20 MiB以下。
 - slug：英小文字・数字・ハイフン、最大100文字。
 - 更新時に不要になった画像は削除しません。

@@ -1,4 +1,5 @@
 ---
+draft: false
 title: "2次曲線ジェネラティブアート"
 description: "p5.jsで制作したジェネラティブアート。6月の #minacoding に、さまざまな表現を投稿しました。"
 year: 2025

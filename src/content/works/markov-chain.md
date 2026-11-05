@@ -1,4 +1,5 @@
 ---
+draft: false
 title: "Markov chain Web"
 description: "Yahooの形態素解析APIとDjangoを使った文章生成サイト。文豪の一節を入れると、それらしい文章を生成します。"
 year: 2024
