@@ -5,7 +5,7 @@ order: 28
 draft: true
 categories:
   - Design
-cover: ../../assets/business-card-study-1.png
+cover: ../../assets/business-card-study.png
 coverAlt: 名前を大きく縦に配置し、下部にCreative Engineerと関心分野を添えた白黒の名刺案
 imageFit: contain
 technologies:
