@@ -3,8 +3,8 @@ draft: false
 title: "Neural Cellular Automataの研究"
 description: "局所的なルールから画像が育つNCAを研究。テキストや画像表現を条件として、生成と学習の安定性を実験しています。"
 year: 2026
-order: 3
-categories: ["Program"]
+order: 6
+categories: ["Program", "Research"]
 cover: "../../assets/nca-experiment.png"
 coverAlt: "2026年7月のテキスト条件付きNCA実験で生成した画像の一覧"
 imageFit: "contain"

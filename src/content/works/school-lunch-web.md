@@ -1,8 +1,8 @@
 ---
 title: 給食ができるまで — Webデザイン
 description: 農園から食堂、食べる人へと続く給食の流れを伝えるWebデザイン。写真、インタビュー、時系列の構成を組み合わせ、身近なご飯の背景を紹介しました。
-order: 30
-draft: true
+order: 9
+draft: false
 categories: [Design]
 cover: ../../assets/school-lunch-web-cover.png
 coverAlt: 給食の写真に「給食ができるまで」というタイトルを重ねたWebデザインの冒頭

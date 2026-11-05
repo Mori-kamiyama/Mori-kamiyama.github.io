@@ -3,7 +3,7 @@ draft: false
 title: "右折だけナビ"
 description: "左折を避ける条件で経路を探す地図アプリ。出発・到着の方位やUターンのペナルティを指定して経路を探索します。"
 year: 2026
-order: 4
+order: 12
 categories: ["Program", "Design"]
 cover: "../../assets/right-turn-app.png"
 coverAlt: "右折だけナビの公開画面。地図と経路探索の設定パネル"

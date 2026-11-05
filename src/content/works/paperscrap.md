@@ -3,7 +3,7 @@ draft: false
 title: "PaperScrap"
 description: "論文の検索・収集と引用関係の探索に取り組むmacOSアプリ。複数の論文検索サービスをSwiftUIの画面につなぎます。"
 year: 2026
-order: 5
+order: 10
 categories: ["Program", "Design"]
 cover: "../../assets/paperscrap-icon.png"
 coverAlt: "PaperScrapの紙を重ねたアプリアイコン"

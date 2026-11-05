@@ -3,7 +3,7 @@ draft: false
 title: "Transcrab"
 description: "会話の文字起こしとAI支援を組み合わせたmacOSアプリ。日本語の会議を準備・記録・振り返る体験を開発しています。"
 year: 2026
-order: 2
+order: 5
 categories: ["Program", "Design"]
 cover: "../../assets/transcrab-icon.png"
 coverAlt: "Transcrabの羽根を描いたアプリアイコン"
