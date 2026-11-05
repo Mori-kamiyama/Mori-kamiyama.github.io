@@ -1,7 +1,7 @@
 ---
 title: 自分を伝える名刺デザイン
 description: 名前、所属、関心のある分野をどう見せるか。縦組み・横組みや配色を比較し、自分の関心を短く伝える名刺を検討しました。
-order: 6
+order: 7
 draft: false
 categories:
   - Design

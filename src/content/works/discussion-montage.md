@@ -2,7 +2,7 @@
 title: 議論を重ねる映像モンタージュ
 description: 複数の実写映像と架空の動画画面を重ねる、20秒のモンタージュ制作。画面の登場、音声の重なり、最後の無音と暗転を組み立てました。
 year: 2026
-order: 31
+order: 44
 draft: true
 categories: [Video, Design]
 technologies: [After Effects, モーショングラフィックス, ExtendScript]

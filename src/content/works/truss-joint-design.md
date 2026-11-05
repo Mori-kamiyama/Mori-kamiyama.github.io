@@ -2,7 +2,7 @@
 title: トラスジョイントの形状検討
 description: 板とパイプをつなぐ小さなジョイントを、複数の角度で検討。コンパクトさを保ちながら、穴同士の干渉やスリットまわりの形状を見直しました。
 year: 2026
-order: 9
+order: 13
 draft: false
 categories: [Design, Research]
 cover: ../../assets/truss-joint-study.png

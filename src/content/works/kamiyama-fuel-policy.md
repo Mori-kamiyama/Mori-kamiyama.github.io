@@ -2,7 +2,7 @@
 title: 神山町の燃料アクセスを考える政策調査
 description: 給油所の存続だけでなく、給油・灯油配送・災害時の供給などの機能に分けて、地域で燃料を得る手段を考える政策提案の検討です。
 year: 2026
-order: 13
+order: 19
 draft: false
 categories: [Planning, Research]
 technologies: [公開資料調査, 課題整理, 政策提案]

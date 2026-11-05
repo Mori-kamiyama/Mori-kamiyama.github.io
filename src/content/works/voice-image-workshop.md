@@ -2,7 +2,7 @@
 title: 声から画像を作るAIワークショップ教材
 description: 音声認識・文章生成・画像生成を一つずつ試してから組み合わせる教材。完成までの手順と、途中の出力を確かめる画面を用意しました。
 year: 2026
-order: 5
+order: 8
 draft: false
 categories: [Education, Design, Program]
 cover: ../../assets/voice-image-workshop-flow.webp

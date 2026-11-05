@@ -1,13 +1,13 @@
 ---
 title: Sparklish — 留学中の振り返りを支えるサービス企画
 description: 留学中にうまく話せなかった体験を、次の日の練習につなげる。小型デバイスとAIを組み合わせるサービスをチームで企画し、利用場面を発表資料にまとめました。
-order: 10
+order: 14
 draft: false
-categories: [Planning, Design]
+categories: [Planning, Design, Program]
 cover: ../../assets/sparklish-pitch.png
 coverAlt: Sparklishのサービス提案スライド。留学中の復習を支える小型デバイスとAIサービスのコンセプトを示している
 imageFit: contain
-technologies: [Figma Slides, サービス企画, プレゼンテーション]
+technologies: [Figma Slides, サービス企画, SwiftUI, SwiftData, Node.js]
 gallery:
   - image: ../../assets/sparklish-flow.png
     alt: Sparklishの録音・分析・復習という三段階の機能を説明するスライド
@@ -30,3 +30,9 @@ links:
 会話を録音し、文字起こしや分析を通じて間違いを確かめ、寝る前の復習に使う構成です。小型デバイスとアプリを組み合わせる体験を、画面や利用場面とともに提案しました。
 
 掲載したスライドは、チームで検討したサービスの提案資料です。
+
+## 企画から、アプリの試作へ
+
+iOS版では、録音の状態や経過時間、文字起こしを表示する画面と、会話を振り返る復習カードを試作しています。録音データを区切って扱う処理や、文字起こしサービスとの接続、端末内での保存も実装しました。
+
+企画資料で描いた一日の流れを、操作できる画面へつなげている段階です。

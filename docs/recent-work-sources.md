@@ -56,3 +56,27 @@ Homeでは開発、デバイス、教材、グラフィックなどが続けて�
 | --- | --- | --- |
 | Tonight | `android/auto-mail/docs/product-vision.md`、`OcrParser.kt`、`GeminiFollowUpDraftGenerator.kt`、`FollowUpEditorScreen.kt`、`FollowUpReminderWorker.kt` | Androidの試作として掲載。画像は未設定で、連絡先や会話の実データは使わない。メール下書きの編集とメールアプリへの引き継ぎまでを説明し、自動送信とは記載しない |
 | EvoLife | `Alife/EvoLife/docs/README.md`、`docs/experiments.md`、`src/kite_asal_search.py` と観察器の実装、`runs/20260430-165513-cpu1000-siglip2-target-prod/meta.json`・`summary.csv` | 表紙は同runの `frames/06_global_candidate-0045/gen-000240.ppm` をPNGへ形式変換。ギャラリーは `runs/snapshots-seed63-bec0139-cost14/timeline.png`。CPUシミュレーション＋GPU観察器の役割を明記。GPUによるシミュレーション全体の高速化や、zineの完成は主張しない |
+
+## 掲載候補から追加した13件
+
+「追加できそうなものは追加」の依頼を受け、以下を掲載する。公開43件・下書き1件。元の資料と実装から紹介し、制作年・配布・利用者数・性能を未確認のまま補わない。試作・学習の段階も本文に含める。
+
+| 作品 | 根拠と掲載の範囲 | 画像 |
+| --- | --- | --- |
+| Chatmini | `android/Chatmini` の `MainActivity.kt`、`model/Lfm3OmniEngine.kt`、履歴・記憶・書き出し実装。端末内の推論と、履歴や記憶を扱うAndroidの試作 | 未設定。実際の会話や写真は使わない |
+| 自作Slidevテーマ | `yuta-theme/layouts/` の8レイアウト、`styles/`、`example.md`。テーマの配布実績は記載しない | 元ファイルのコピーをSlidev 52.10.1で書き出した `example.md` の2・7・8枚目。原本の内容・設定は変更していない |
+| 技術は思考を拡張するのか、奪うのか | `hist/hist.md`。本人名入りの論考・スライド制作として紹介し、発表の開催実績とはしない | 同ファイルを元のdefaultテーマで書き出した1・12枚目 |
+| Abalone AI | 保存済み `abalone/source/README_NN_GUI.md`、Rust/PyO3の構成と実装。探索・ニューラル評価・GUIを紹介する。proxy比較から性能優位を主張しない | 未設定 |
+| 数式からつくる貝殻 | 保存済み `Alife/cone-snail/source/README.md`、`ai/raup.py` と `pov/`。参考モデルからの形態模倣・メッシュ生成として紹介 | 元の `pov/out/snail-shell-preview-pov-camera.png` |
+| Fish Colony | 公開 `Mori-kamiyama/fish_colony/src/main.rs`。100個体、凝集・整列・分離、nannouによる描画を確認 | 未設定 |
+| GoBits | `Gobits/GoBits/GoBits/GameView.swift`、`GoBitsApp.swift`、KataGo通信・設定の実装。7路盤、メニューバー、エンジン接続の試作 | 未設定 |
+| K-Combinator AI | `ai-chat-next/README.md` とWeb実装、`ai chat app/src/components/layout/AppShell.tsx`。Webとデスクトップは一つの作品として紹介 | 未設定 |
+| Lineback | `android/lineback` の `ReplyAssistA11yService.kt`、`ReplyPipeline.kt`、`MainActivity.kt`。OCRからGemini APIで候補を生成し、コピーする試作 | 未設定。実際の会話は使わない |
+| Tetopoppo | `TypeScript/tetopoppo/src/App.tsx`、`utils/ttrmParser.ts`、`components/ReplayControls.tsx`。解析と盤面再構成、操作UIの試作。フォールバック処理があり、実リプレイの完全再現は主張しない | 未設定 |
+| 格子ボルツマン法で見る、流れと渦 | `LBM/Projects/01_qiita_pj/lbm.py`。参考実装を土台にしたD2Q9の学習と障害物・渦度の可視化 | 元のコードをAggで実行し、`update` を80回呼び出した後のfigureを保存。定量的な精度検証はしていない |
+| Qquick | `firefox/qquick/manifest.json`、`popup.js`。現在のタブからQRを生成し、余白付きPNGを保存する拡張。ストア配布は未確認 | 未設定 |
+| ブラウザで触る、音の実験 | `HTML/dram/index.html`。Web Audioの発振器、波形・音階・フィルター、キーボードの入力を確認 | 未設定 |
+
+既存のSparklishには、`RecordingViewModel.swift`、`NightlyReviewView.swift` で確認したiOSの録音・文字起こし・復習カードの試作を追記した。高専プロコンには、`cpp/procon_W&B` のC++ソルバー・Python実行・メトリクスの記録を追記し、別の作品には分割しない。
+
+実機アプリ、対戦エンジン、クラウドAPIは今回再検証していない。スライドは書き出した画像を目視確認し、流体コードは画像生成まで実行した。新しい外部サービス、配布リンク、個人の会話データは追加しない。

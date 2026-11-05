@@ -1,7 +1,7 @@
 ---
 title: Idea Match — ひらめきを残すデバイスとポスター
 description: 振って話すと、思いつきを記録できる手のひらサイズのメモ。デバイスの使い方と仕組みを、マッチと炎のモチーフで一枚のポスターにまとめました。
-order: 4
+order: 5
 draft: false
 categories: [Design, Program]
 cover: ../../assets/idea-match-poster.png
