@@ -3,7 +3,7 @@ draft: false
 title: "Senpai Chat"
 description: "ソフトバンク様との共創プロジェクト。新入生に人間関係・部活動・寮のルールを説明するチャットボットを制作しました。"
 year: 2025
-order: 21
+order: 23
 categories: ["Program"]
 cover: "../../assets/studio-senpai-chat.webp"
 coverAlt: "Senpai Chatのチャットボットアイコン"

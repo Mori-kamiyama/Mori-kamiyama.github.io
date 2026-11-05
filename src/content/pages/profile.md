@@ -32,7 +32,7 @@ policyDescription: |-
 skillsIntroduction: |-
   2024年からプログラミング・デザインを始めました。
   高専プログラミングコンテストや校内でのプロジェクトを通して、
-  iOSアプリからWebアプリ、サーバー周りまで学んできました。
+  iOS・AndroidアプリからWebアプリ、サーバー周りまで学んできました。
 designIntroduction: |-
   デザインでは、FigmaやIllustratorなどのデザインツールからStudioといったノーコードまで。
   ケースに応じた制作を学んできました。

@@ -47,3 +47,12 @@ Figmaの原本は変更せず、書き出したPNGを `src/assets/` に保存し
 「最近の作ったものを更新」の依頼を受け、上記の下書きから7件を公開。公開28件・下書き1件。映像モンタージュはAEPと生成スクリプトはあるが完成出力を確認できないため、下書きを維持する。本人の指定で掲載対象外にした紹介ファイルと出典は現行版から削除した。
 
 Homeでは開発、デバイス、教材、グラフィックなどが続けて目に入るよう、最近の取り組みを先頭に混ぜて並べた。制作年が不明なFigma作品には年を補わず、掲載順と制作日順を区別する。開発以外の制作も一目で伝わるという仮説で、見た人の反応は今後確認する。
+
+## TonightとEvoLife
+
+本人の希望を受け、2件を追加。公開30件・下書き1件となる。実装と保存済みの実験結果から紹介し、アプリの実機動作やGPU実験は今回再実行していない。
+
+| 作品 | 確認した根拠 | 掲載素材・表現 |
+| --- | --- | --- |
+| Tonight | `android/auto-mail/docs/product-vision.md`、`OcrParser.kt`、`GeminiFollowUpDraftGenerator.kt`、`FollowUpEditorScreen.kt`、`FollowUpReminderWorker.kt` | Androidの試作として掲載。画像は未設定で、連絡先や会話の実データは使わない。メール下書きの編集とメールアプリへの引き継ぎまでを説明し、自動送信とは記載しない |
+| EvoLife | `Alife/EvoLife/docs/README.md`、`docs/experiments.md`、`src/kite_asal_search.py` と観察器の実装、`runs/20260430-165513-cpu1000-siglip2-target-prod/meta.json`・`summary.csv` | 表紙は同runの `frames/06_global_candidate-0045/gen-000240.ppm` をPNGへ形式変換。ギャラリーは `runs/snapshots-seed63-bec0139-cost14/timeline.png`。CPUシミュレーション＋GPU観察器の役割を明記。GPUによるシミュレーション全体の高速化や、zineの完成は主張しない |

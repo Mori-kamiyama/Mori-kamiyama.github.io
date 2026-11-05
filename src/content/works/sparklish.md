@@ -1,7 +1,7 @@
 ---
 title: Sparklish — 留学中の振り返りを支えるサービス企画
 description: 留学中にうまく話せなかった体験を、次の日の練習につなげる。小型デバイスとAIを組み合わせるサービスをチームで企画し、利用場面を発表資料にまとめました。
-order: 8
+order: 10
 draft: false
 categories: [Planning, Design]
 cover: ../../assets/sparklish-pitch.png

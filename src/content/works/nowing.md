@@ -3,7 +3,7 @@ draft: false
 title: "Nowing"
 description: "やることより、やったことを。学校課題として、取り組みを記録するToDoアプリをデザインしました。"
 year: 2025
-order: 18
+order: 20
 categories: ["Design"]
 cover: "../../assets/studio-nowing.webp"
 coverAlt: "Nowingの画面設計"

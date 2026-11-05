@@ -3,7 +3,7 @@ draft: false
 title: "学内プログラミング学習サイト"
 description: "校内向けのプログラミング自習サイトを制作。Notionでつくっていた問題集をWebで公開しました。"
 year: 2024
-order: 25
+order: 27
 categories: ["Program"]
 cover: "../../assets/studio-manna.webp"
 coverAlt: "プログラミング学習サイトMannaのロゴ"

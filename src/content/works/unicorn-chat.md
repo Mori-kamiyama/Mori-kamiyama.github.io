@@ -3,7 +3,7 @@ draft: false
 title: "Unicorn Chat"
 description: "法律情報と起業スピリットを搭載したAIチャットボット。日本の法律・ガイドラインを扱うプロジェクトです。"
 year: 2025
-order: 14
+order: 16
 categories: ["Program"]
 cover: "../../assets/studio-unicorn.webp"
 coverAlt: "Unicorn Chatのユニコーン"

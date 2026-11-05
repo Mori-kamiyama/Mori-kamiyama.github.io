@@ -3,7 +3,7 @@ draft: false
 title: "技研エコサイクル デザインコンペ"
 description: "学校に設置されるモバエコの校内デザインコンペに応募。テクノロジーの幾何学美と自然の曲線を融合しました。"
 year: 2024
-order: 23
+order: 25
 categories: ["Design"]
 cover: "../../assets/studio-ecocycle.webp"
 coverAlt: "電動駐輪場モバエコのデザイン提案"
